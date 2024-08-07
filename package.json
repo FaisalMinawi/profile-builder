@@ -12,7 +12,12 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{ts,js,jsx,tsx,html,css,scss,json}": "prettier --write"
+    "**/*.{ts,js,jsx,tsx,html,css,scss,json}": [
+      "prettier --write"
+    ],
+    "!(front-end)/**/*.{js,jsx,ts,tsx}": [
+      "npm test"
+    ]
   },
   "devDependencies": {
     "husky": "^8.0.3",
