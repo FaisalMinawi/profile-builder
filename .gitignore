@@ -1,2 +1,11 @@
+# Dependencies
+node_modules
+*/node_modules
+
+# Serverless directories
+.serverless
+*/.serverless
+
+# Environment variables
 .env
 */.env

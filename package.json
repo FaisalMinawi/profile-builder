@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "npx prettier --write .",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path .prettierignore",
     "prepare": "husky install && chmod ug+x .husky/*"
   },
   "author": "",
@@ -14,8 +15,9 @@
     "*.{ts,js,jsx,tsx,html,css,scss,json}": "prettier --write"
   },
   "devDependencies": {
-    "prettier": "3.0.0",
-    "husky": "8.0.3",
-    "lint-staged": "13.2.3"
-  }
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0"
+  },
+  "keywords": []
 }

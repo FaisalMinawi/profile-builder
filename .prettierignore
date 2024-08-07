@@ -1,3 +1,14 @@
-# ignore assets
-node_modules/
+# Directories
+front-end
+node_modules
+**/node_modules
+.serverless
+**/.serverless
 
+# Environment variables
+.env
+**/.env
+
+# Package files
+package-lock.json
+yarn.lock
