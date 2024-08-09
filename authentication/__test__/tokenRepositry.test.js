@@ -32,8 +32,14 @@ describe('tokenManager', () => {
       const refreshTokenExpiration = '5494644';
       const refreshTokenInvalidated = false;
       mockPut.mockResolvedValueOnce({});
-      
-      await tokenManager.storeTokens(accessToken, refreshToken, accessTokenExpiration, refreshTokenExpiration,refreshTokenInvalidated);
+
+      await tokenManager.storeTokens(
+        accessToken,
+        refreshToken,
+        accessTokenExpiration,
+        refreshTokenExpiration,
+        refreshTokenInvalidated
+      );
 
       expect(dynamoDbClient.put).toHaveBeenCalledWith({
         TableName: config.dynamoDbTable,
@@ -45,7 +51,7 @@ describe('tokenManager', () => {
           invalidated: false,
           refreshToken,
           refreshTokenExpiration,
-          refreshTokenInvalidated
+          refreshTokenInvalidated,
         },
       });
     });
@@ -55,7 +61,7 @@ describe('tokenManager', () => {
     it('should invalidate the token in DynamoDB', async () => {
       const refreshToken = 'testToken';
       mockUpdate.mockResolvedValueOnce({});
-      
+
       await tokenManager.invalidateToken(refreshToken);
 
       expect(dynamoDbClient.update).toHaveBeenCalledWith({
@@ -80,7 +86,7 @@ describe('tokenManager', () => {
           invalidated: true,
         },
       });
-      
+
       const result = await tokenManager.isTokenInvalidated(refreshToken);
 
       expect(dynamoDbClient.get).toHaveBeenCalledWith({
@@ -100,7 +106,7 @@ describe('tokenManager', () => {
           invalidated: false,
         },
       });
-      
+
       const result = await tokenManager.isTokenInvalidated(refreshToken);
 
       expect(dynamoDbClient.get).toHaveBeenCalledWith({
@@ -112,6 +118,5 @@ describe('tokenManager', () => {
       });
       expect(result).toBe(false);
     });
-
   });
 });

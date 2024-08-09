@@ -32,13 +32,12 @@ describe('Auth Controller and Middleware', () => {
     res = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
-      json: jest.fn() // Ensure json method is defined
+      json: jest.fn(), // Ensure json method is defined
     };
     next = jest.fn();
 
     jest.resetAllMocks();
   });
-
 
   describe('Controller: login', () => {
     it('should return tokens for valid credentials', async () => {
@@ -77,11 +76,19 @@ describe('Auth Controller and Middleware', () => {
       const mockTokenData = {
         accessToken: 'oldAccessToken',
         refreshToken: 'validRefreshToken',
-        refreshTokenInvalidated: false
+        refreshTokenInvalidated: false,
       };
       tokenService.getTokenByRefreshToken.mockResolvedValue(mockTokenData);
       jwt.verify.mockImplementation(() => {});
-      jwt.decode.mockReturnValue({ payload: { email: 'test@example.com', firstName: 'John', lastName: 'Doe', roles: ['user'], permissions: ['read'] } });
+      jwt.decode.mockReturnValue({
+        payload: {
+          email: 'test@example.com',
+          firstName: 'John',
+          lastName: 'Doe',
+          roles: ['user'],
+          permissions: ['read'],
+        },
+      });
       jwt.sign.mockReturnValue('newAccessToken');
 
       await request(app)

@@ -2,7 +2,6 @@ const userRepository = require('../infrastructure/userRepository');
 const dynamoDbClient = require('../infrastructure/dynamoDbClient');
 const config = require('../config/config');
 
-
 // Mocking DynamoDB client methods
 jest.mock('../infrastructure/dynamoDbClient');
 
@@ -13,23 +12,20 @@ describe('userRepository', () => {
 
   describe('getUserByEmail', () => {
     it('should fetch user from DynamoDB', async () => {
-        const mockUser = {
-            PK: "users",
-            SK: "users#iqra@gmail.com",
-            email: "iqra@gmail.com",
-            firstName: "Iqra",
-            lastName: "Baig",
-            password: "12345",
-            role: [
-             "recruiter",
-             "admin"
-            ],
-            username:"iqrabaig123"
-           };
+      const mockUser = {
+        PK: 'users',
+        SK: 'users#iqra@gmail.com',
+        email: 'iqra@gmail.com',
+        firstName: 'Iqra',
+        lastName: 'Baig',
+        password: '12345',
+        role: ['recruiter', 'admin'],
+        username: 'iqrabaig123',
+      };
 
       // Mock DynamoDB client response
       dynamoDbClient.get.mockImplementation(() => ({
-        promise: jest.fn().mockResolvedValue({ Item: mockUser })
+        promise: jest.fn().mockResolvedValue({ Item: mockUser }),
       }));
 
       const email = 'test@example.com';
@@ -42,8 +38,8 @@ describe('userRepository', () => {
         TableName: config.dynamoDbTable, // Replace with your actual table name
         Key: {
           PK: 'users',
-          SK: `users#${email}`
-        }
+          SK: `users#${email}`,
+        },
       });
     });
 
@@ -52,7 +48,7 @@ describe('userRepository', () => {
 
       // Mock DynamoDB client response with error
       dynamoDbClient.get.mockImplementation(() => ({
-        promise: jest.fn().mockRejectedValue(mockError)
+        promise: jest.fn().mockRejectedValue(mockError),
       }));
 
       const email = 'test@example.com';
@@ -64,8 +60,8 @@ describe('userRepository', () => {
         TableName: config.dynamoDbTable, // Replace with your actual table name
         Key: {
           PK: 'users',
-          SK: `users#${email}`
-        }
+          SK: `users#${email}`,
+        },
       });
     });
   });
