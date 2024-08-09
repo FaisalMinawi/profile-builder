@@ -27,9 +27,7 @@ const Courses = ({ data }) => {
           <div key={index} className="lg:flex lg:space-x-9">
             {/* left side + Course Title */}
             <div className="lg:w-1/6">
-              <h2 className="text-base font-bold text-EX1 mb-3 lg:mb-6">
-                {course.courseProvider}
-              </h2>
+              <h2 className="text-base font-bold text-EX1 mb-3 lg:mb-6">{course.courseProvider}</h2>
             </div>
             {/* right */}
             <div className="lg:w-5/6">

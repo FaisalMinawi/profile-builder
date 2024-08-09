@@ -15,34 +15,34 @@ import { fetchProfile } from "../../State/profile/profileSlice";
 import "../../editor.css";
 
 function ProfileEditor() {
-	const { slug } = useParams();
-	const dispatch = useDispatch();
-	const profile = useSelector((state) => state.profile.data);
+  const { slug } = useParams();
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile.data);
 
-	useEffect(() => {
-		if (slug) {
-			dispatch(fetchProfile(slug));
-		}
-	}, [slug, dispatch]);
+  useEffect(() => {
+    if (slug) {
+      dispatch(fetchProfile(slug));
+    }
+  }, [slug, dispatch]);
 
-	return (
-		<>
-			{profile && (
-				<div>
-					<Status data={profile} />
-					<About data={profile} />
-					<TechnicalSkills data={profile} />
-					<Experiences data={profile} />
-					<Education data={profile} />
-					<Courses data={profile} />
-					<ParentProject data={profile} />
-					<Awards data={profile} />
-					<Volunteering data={profile} />
-					<Recommendation data={profile} />
-				</div>
-			)}
-		</>
-	);
+  return (
+    <>
+      {profile && (
+        <div>
+          <Status data={profile} />
+          <About data={profile} />
+          <TechnicalSkills data={profile} />
+          <Experiences data={profile} />
+          <Education data={profile} />
+          <Courses data={profile} />
+          <ParentProject data={profile} />
+          <Awards data={profile} />
+          <Volunteering data={profile} />
+          <Recommendation data={profile} />
+        </div>
+      )}
+    </>
+  );
 }
 
 export default ProfileEditor;

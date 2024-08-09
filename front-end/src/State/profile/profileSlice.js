@@ -3,14 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { GET_PROFILE_DATA } from "../../api";
 
-export const fetchProfile = createAsyncThunk(
-  "profile/fetchProfile",
-  async (slug) => {
-    const response = await axios.get(`${GET_PROFILE_DATA}/${slug}`);
-    console.log(response.data);
-    return response.data;
-  }
-);
+export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (slug) => {
+  const response = await axios.get(`${GET_PROFILE_DATA}/${slug}`);
+  console.log(response.data);
+  return response.data;
+});
 
 const profileSlice = createSlice({
   name: "profile",

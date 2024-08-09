@@ -1,22 +1,12 @@
 import { Button, Form, Input, Select, message } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  CHANGE_PASSWORD_API,
-  CREATE_USER_API,
-  UPDATE_USER_API,
-} from "../../api";
+import { CHANGE_PASSWORD_API, CREATE_USER_API, UPDATE_USER_API } from "../../api";
 import "../Forms/SimpleForm.css";
 
 const { Option } = Select;
 
-const UserForm = ({
-  onUserCreated,
-  userDetails,
-  isEditUser,
-  isEditUserPass,
-  userEmail,
-}) => {
+const UserForm = ({ onUserCreated, userDetails, isEditUser, isEditUserPass, userEmail }) => {
   const [form] = Form.useForm();
   const [changePasswordForm] = Form.useForm();
   const [roles, setRoles] = useState({
@@ -35,9 +25,7 @@ const UserForm = ({
           value: getTrueRoles(userDetails.roles),
         },
       ]);
-      handleRoleChange(
-        Object.keys(userDetails.roles).filter((role) => userDetails.roles[role])
-      );
+      handleRoleChange(Object.keys(userDetails.roles).filter((role) => userDetails.roles[role]));
     } else if (isEditUserPass) {
       changePasswordForm.setFields([
         {
@@ -80,9 +68,13 @@ const UserForm = ({
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.-])[A-Za-z\d@$!%*?&.-]{8,}$/;
     return !value || passwordRegex.test(value)
       ? Promise.resolve()
-      : Promise.reject(new Error("Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character (e.g., @, $, !, %, *, ?, &, ., -)."));
+      : Promise.reject(
+          new Error(
+            "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character (e.g., @, $, !, %, *, ?, &, ., -)."
+          )
+        );
   };
-  
+
   const handleSubmit = async (values) => {
     const userData = {
       PK: "users",
@@ -113,12 +105,8 @@ const UserForm = ({
     const apiUrl = isEditUser ? UPDATE_USER_API : CREATE_USER_API;
 
     try {
-      const response = isEditUser
-        ? await axios.put(apiUrl, userData)
-        : await axios.post(apiUrl, userData);
-      message.success(
-        `User ${isEditUser ? "updated" : "created"} successfully!`
-      );
+      const response = isEditUser ? await axios.put(apiUrl, userData) : await axios.post(apiUrl, userData);
+      message.success(`User ${isEditUser ? "updated" : "created"} successfully!`);
       form.resetFields();
       onUserCreated(); // Trigger the callback to refresh the table
     } catch (error) {
@@ -141,27 +129,18 @@ const UserForm = ({
   return (
     <div className="form">
       {!isEditUserPass && (
-        <Form
-          form={form}
-          size="large"
-          layout="vertical"
-          onFinish={handleSubmit}
-        >
+        <Form form={form} size="large" layout="vertical" onFinish={handleSubmit}>
           <Form.Item
             label="First Name"
             name="firstName"
-            rules={[
-              { required: true, message: "Please input your first name!" },
-            ]}
+            rules={[{ required: true, message: "Please input your first name!" }]}
           >
             <Input placeholder="First Name" />
           </Form.Item>
           <Form.Item
             label="Last Name"
             name="lastName"
-            rules={[
-              { required: true, message: "Please input your last name!" },
-            ]}
+            rules={[{ required: true, message: "Please input your last name!" }]}
           >
             <Input placeholder="Last Name" />
           </Form.Item>
@@ -192,15 +171,9 @@ const UserForm = ({
           <Form.Item
             label="Roles"
             name="roles"
-            rules={[
-              { required: true, message: "Please select at least one role!" },
-            ]}
+            rules={[{ required: true, message: "Please select at least one role!" }]}
           >
-            <Select
-              mode="multiple"
-              placeholder="Select roles"
-              onChange={handleRoleChange}
-            >
+            <Select mode="multiple" placeholder="Select roles" onChange={handleRoleChange}>
               <Option value="admin">Admin</Option>
               <Option value="buisnessReviewer">Business Reviewer</Option>
               <Option value="recruiter">Recruiter</Option>
@@ -216,12 +189,7 @@ const UserForm = ({
       )}
 
       {isEditUserPass && (
-        <Form
-          form={changePasswordForm}
-          size="large"
-          layout="vertical"
-          onFinish={handlePasswordChange}
-        >
+        <Form form={changePasswordForm} size="large" layout="vertical" onFinish={handlePasswordChange}>
           <Form.Item
             label="Email"
             name="email"
@@ -232,11 +200,7 @@ const UserForm = ({
           >
             <Input disabled={true} />
           </Form.Item>
-          <Form.Item
-            label="Password"
-            name="newPassword"
-            rules={[{validator: validatePassword , required: true}]}
-          >
+          <Form.Item label="Password" name="newPassword" rules={[{ validator: validatePassword, required: true }]}>
             <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item>

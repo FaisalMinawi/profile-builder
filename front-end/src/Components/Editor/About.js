@@ -33,10 +33,7 @@ function About({ data }) {
         <EditBtn formType="EditBases" data={data} />
         <h4 class="text-lg font-bold mt-6">Languages</h4>
         <p class="text-base mt-1">
-          {data.languages.map(
-            (language) =>
-              language.name + "(" + language.proficiencyLevel + "), "
-          )}
+          {data.languages.map((language) => language.name + "(" + language.proficiencyLevel + "), ")}
         </p>
         <EditBtn formType="EditLanguages" data={data} />
         <div class="flex mt-6 font-semibold space-x-2">

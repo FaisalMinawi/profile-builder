@@ -45,29 +45,19 @@ function LoginForm() {
       <h1>Welcome back!</h1>
       <p>Please login to continue</p>
       <div className="login-form">
-        <Form
-          size="large"
-          layout="vertical"
-          form={form}
-          onFinish={(values) => onSubmitHandler(values)}
-        >
+        <Form size="large" layout="vertical" form={form} onFinish={(values) => onSubmitHandler(values)}>
           <Flex vertical>
             <Form.Item
               label="Email"
               name="email"
-              rules={[
-                { validator: validateEmail },
-                { required: true, message: "Please enter your email" },
-              ]}
+              rules={[{ validator: validateEmail }, { required: true, message: "Please enter your email" }]}
             >
               <Input placeholder="example@mail.com" type="text" />
             </Form.Item>
             <Form.Item
               label="Password"
               name="password"
-              rules={[
-                { required: true, message: "Please enter your password" },
-              ]}
+              rules={[{ required: true, message: "Please enter your password" }]}
             >
               <Input placeholder="Enter your password" type="password" />
             </Form.Item>

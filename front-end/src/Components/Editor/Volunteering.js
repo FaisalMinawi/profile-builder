@@ -4,11 +4,7 @@ const Volunteering = ({ data }) => {
   const volunteeringData = data.volunteering || [];
   if (volunteeringData.length === 0) {
     return (
-      <section
-        id="volunteering"
-        className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-        data-toggle
-      >
+      <section id="volunteering" className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
         {/* Section title */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Volunteering</h2>
@@ -18,11 +14,7 @@ const Volunteering = ({ data }) => {
     );
   }
   return (
-    <section
-      id="volunteering"
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
+    <section id="volunteering" className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
       {/* Section title */}
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl">Volunteering</h2>
@@ -57,16 +49,11 @@ const Volunteering = ({ data }) => {
                 </div>
                 {/* Volunteering desc */}
                 <div
-                  className={`volunteer-desc pb-6 ${
-                    volunteeringIndex === data.volunteering.length - 1
-                      ? ""
-                      : "mb-6"
-                  }`}
+                  className={`volunteer-desc pb-6 ${volunteeringIndex === data.volunteering.length - 1 ? "" : "mb-6"}`}
                 >
                   <p>{volunteering.description}</p>
                   <p>
-                    {volunteering.location.cityState},{" "}
-                    {volunteering.location.country}
+                    {volunteering.location.cityState}, {volunteering.location.country}
                   </p>
                 </div>
               </div>

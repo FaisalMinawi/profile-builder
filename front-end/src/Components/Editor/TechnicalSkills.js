@@ -5,10 +5,7 @@ import RegenerateBtn from "../UI/RegenerateBtn";
 function TechnicalSkills({ data }) {
   if (data.technicalSkills.length === 0) {
     return (
-      <section
-        className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-        data-toggle
-      >
+      <section className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
         {/* Section title */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Technical Skills</h2>
@@ -21,10 +18,7 @@ function TechnicalSkills({ data }) {
     );
   }
   return (
-    <section
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
+    <section className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
       {/* Section title */}
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl">Technical Skills</h2>
@@ -37,13 +31,8 @@ function TechnicalSkills({ data }) {
         <div className="w-100 h-px bg-Gray my-4"></div>
         {/* Skill categories */}
         {data.technicalSkills.map((skillSection, sectionIndex) => (
-          <div
-            key={sectionIndex}
-            className="mb-6 lg:flex lg:space-x-6 lg:space-x-9"
-          >
-            <h3 className="mb-2 font-bold text-lg lg:w-1/6">
-              {skillSection.sectionName}:
-            </h3>
+          <div key={sectionIndex} className="mb-6 lg:flex lg:space-x-6 lg:space-x-9">
+            <h3 className="mb-2 font-bold text-lg lg:w-1/6">{skillSection.sectionName}:</h3>
             <p className="lg:w-5/6">
               {skillSection.skills.map((sk, index) => (
                 <React.Fragment key={index}>

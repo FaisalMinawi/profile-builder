@@ -6,10 +6,7 @@ function UserInfo() {
 
   return (
     <Flex align="center" justify="center" gap={10} vertical={false}>
-      <Tooltip
-        placement="bottom"
-        title={userData?.firstName + userData?.lastName}
-      >
+      <Tooltip placement="bottom" title={userData?.firstName + userData?.lastName}>
         {" "}
         <Avatar
           style={{

@@ -1,7 +1,6 @@
 import React from "react";
 import RegenerateBtn from "../UI/RegenerateBtn";
 
-
 const Project = ({ project, projectIndex, data }) => {
   if (!project) return null;
   return (
@@ -42,11 +41,7 @@ const Project = ({ project, projectIndex, data }) => {
                     </span>
                   ))}
                   <div className="flex space-x-2">
-                    <RegenerateBtn
-                      formType="AdditionalProjects"
-                      data={data}
-                      projectIndex={projectIndex}
-                    />
+                    <RegenerateBtn formType="AdditionalProjects" data={data} projectIndex={projectIndex} />
                   </div>
                 </div>
               </>

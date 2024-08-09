@@ -12,39 +12,34 @@ import ProfileEditor from "./Pages/Profiles/ProfileEditor";
 import RecreateProfile from "./Pages/RecreateProfile";
 import AuthProvider from "./Providers/AuthProvider";
 function App() {
-	const { accessToken } = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
 
   return (
     <BrowserRouter>
-    <AuthProvider>
-      <Routes>
-        {/* Protected Dashboard layout routes */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<DashboardLayout />}>
-            <Route index element={<DashboardPage />} />
-            <Route path="profiles" element={<ProfilesPage />} />
-            <Route path="users" element={<UsersPage />} />
-            <Route path="create-profile" element={<CreateProfile />} />
-            <Route path="profiles/editor/:slug" element={<ProfileEditor />} />
-            <Route path="recreate-profile" element={<RecreateProfile />} />
+      <AuthProvider>
+        <Routes>
+          {/* Protected Dashboard layout routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<DashboardPage />} />
+              <Route path="profiles" element={<ProfilesPage />} />
+              <Route path="users" element={<UsersPage />} />
+              <Route path="create-profile" element={<CreateProfile />} />
+              <Route path="profiles/editor/:slug" element={<ProfileEditor />} />
+              <Route path="recreate-profile" element={<RecreateProfile />} />
+            </Route>
           </Route>
-        </Route>
 
-        {/* Auth layout routes */}
-        <Route path="auth/" element={<AuthLayout />}>
-          <Route path="login" element={<LoginPage />} />
-        </Route>
+          {/* Auth layout routes */}
+          <Route path="auth/" element={<AuthLayout />}>
+            <Route path="login" element={<LoginPage />} />
+          </Route>
 
-        {/* Redirect any unknown routes to the dashboard or login page */}
-        <Route
-          path="*"
-          element={
-            <Navigate to={accessToken ? "/" : "/auth/login"} replace />
-          }
-        />
-      </Routes>
-    </AuthProvider>
-  </BrowserRouter>
+          {/* Redirect any unknown routes to the dashboard or login page */}
+          <Route path="*" element={<Navigate to={accessToken ? "/" : "/auth/login"} replace />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

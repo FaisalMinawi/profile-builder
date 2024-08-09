@@ -5,10 +5,7 @@ import RegenerateBtn from "../UI/RegenerateBtn";
 const Recommendation = ({ data }) => {
   if (data.recommendations.length === 0) {
     return (
-      <section
-        className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-        data-toggle
-      >
+      <section className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
         {/* Section title */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Recommendations</h2>
@@ -18,10 +15,7 @@ const Recommendation = ({ data }) => {
     );
   }
   return (
-    <section
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
+    <section className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
       {/* Section title */}
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl">Recommendations</h2>
@@ -36,12 +30,8 @@ const Recommendation = ({ data }) => {
               <div className="flex add-wrap gap-3 items-center">
                 {/* Title and name flex container */}
                 <div className="lg:w-3/4">
-                  <h3 className="text-base font-bold">
-                    {recommendation.recommenderName}
-                  </h3>
-                  <p className="text-xs text-EX2">
-                    {recommendation.recommenderRelation}
-                  </p>
+                  <h3 className="text-base font-bold">{recommendation.recommenderName}</h3>
+                  <p className="text-xs text-EX2">{recommendation.recommenderRelation}</p>
                 </div>
               </div>
             </div>
@@ -50,11 +40,7 @@ const Recommendation = ({ data }) => {
               {/* Recommendation desc */}
               <div className="recom-desc mt-4 lg:mt-0">
                 <p className="text-base">{recommendation.recommendationText}</p>
-                <RegenerateBtn
-                  formType="Recommendations"
-                  data={data}
-                  recommendationIndex={index}
-                />
+                <RegenerateBtn formType="Recommendations" data={data} recommendationIndex={index} />
               </div>
             </div>
           </div>

@@ -20,9 +20,7 @@ const UserManagement = () => {
         createdAt: item.createdAt,
       }));
 
-      const sortedData = [...apiData].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
+      const sortedData = [...apiData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
       setData(sortedData);
     } catch (error) {

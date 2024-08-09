@@ -1,25 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchDashboardData = createAsyncThunk(
-  "dashboard/fetchData",
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const { auth } = getState();
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users",
-        {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const fetchDashboardData = createAsyncThunk("dashboard/fetchData", async (_, { getState, rejectWithValue }) => {
+  try {
+    const { auth } = getState();
+    const response = await axios.get("https://jsonplaceholder.typicode.com/users", {
+      headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
   }
-);
+});
 
 const dashboardSlice = createSlice({
   name: "dashboard",

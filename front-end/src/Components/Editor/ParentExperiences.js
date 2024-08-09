@@ -12,11 +12,7 @@ const Experiences = ({ data }) => {
     );
   }
   return (
-    <section
-      id="experience"
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
+    <section id="experience" className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
       {/* Section title */}
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl">Experiences</h2>

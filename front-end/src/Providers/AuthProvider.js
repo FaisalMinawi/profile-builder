@@ -2,21 +2,14 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  clearTokens,
-  refreshToken,
-  setTokens,
-  setUser,
-} from "../State/auth/authSlice";
+import { clearTokens, refreshToken, setTokens, setUser } from "../State/auth/authSlice";
 import CookieManager from "../Utils/cookieManager";
 import { USER_INFO_API } from "../api";
 
 function AuthProvider({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { accessToken, refreshToken: refreshTokenValue } = useSelector(
-    (state) => state.auth
-  );
+  const { accessToken, refreshToken: refreshTokenValue } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const storedAccessToken = CookieManager.get("accessToken");
@@ -70,19 +63,13 @@ function AuthProvider({ children }) {
       async (error) => {
         const originalRequest = error.config;
 
-        if (
-          error.response.status === 401 &&
-          !originalRequest._retry &&
-          !originalRequest.url.includes("/api/login")
-        ) {
+        if (error.response.status === 401 && !originalRequest._retry && !originalRequest.url.includes("/api/login")) {
           originalRequest._retry = true;
 
           try {
             const action = await dispatch(refreshToken()).unwrap();
             const newAccessToken = action.accessToken;
-            originalRequest.headers[
-              "Authorization"
-            ] = `Bearer ${newAccessToken}`;
+            originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
             originalRequest.headers["refreshToken"] = refreshTokenValue;
             return axios(originalRequest);
           } catch (refreshError) {

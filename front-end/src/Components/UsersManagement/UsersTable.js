@@ -1,10 +1,4 @@
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  LockOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Modal, Spin, Table, Tooltip, message } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
@@ -121,25 +115,13 @@ const UsersTable = ({ data, onRefresh, isLoading }) => {
       render: (_, record) => (
         <div style={{ display: "flex", gap: "6px" }}>
           <Tooltip title="Edit">
-            <Button
-              shape="circle"
-              icon={<EditOutlined />}
-              onClick={() => showEditModal(record.email)}
-            />
+            <Button shape="circle" icon={<EditOutlined />} onClick={() => showEditModal(record.email)} />
           </Tooltip>
           <Tooltip title="Delete">
-            <Button
-              shape="circle"
-              icon={<DeleteOutlined />}
-              onClick={() => showDeleteConfirm(record.email)}
-            />
+            <Button shape="circle" icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(record.email)} />
           </Tooltip>
           <Tooltip title="Change Password">
-            <Button
-              shape="circle"
-              icon={<LockOutlined />}
-              onClick={() => showEditModalPassChange(record.email)}
-            />
+            <Button shape="circle" icon={<LockOutlined />} onClick={() => showEditModalPassChange(record.email)} />
           </Tooltip>
         </div>
       ),
@@ -157,9 +139,7 @@ const UsersTable = ({ data, onRefresh, isLoading }) => {
         <Table columns={columns} dataSource={data} pagination={false} />
       </Spin>
       <Modal
-        title={
-          editMode ? "Edit User" : editModePass ? "Change Password" : "Add User"
-        }
+        title={editMode ? "Edit User" : editModePass ? "Change Password" : "Add User"}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}

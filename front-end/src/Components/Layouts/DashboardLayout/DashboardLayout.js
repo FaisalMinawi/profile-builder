@@ -46,9 +46,7 @@ function DashboardLayout() {
           <Content style={{ padding: 24, margin: 20 }}>
             <Outlet />
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            TalPods ©{new Date().getFullYear()} All rights reserved.
-          </Footer>
+          <Footer style={{ textAlign: "center" }}>TalPods ©{new Date().getFullYear()} All rights reserved.</Footer>
         </Layout>
       </Layout>
     </Layout>

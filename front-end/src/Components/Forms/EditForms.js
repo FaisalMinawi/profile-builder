@@ -56,12 +56,7 @@ export const LevelSeniorityForm = ({ data, close }) => {
           <Input />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -105,12 +100,7 @@ export const SummaryForm = ({ data, close }) => {
           <Input.TextArea rows={4} />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -161,12 +151,7 @@ export const LocationForm = ({ data, close }) => {
           <Input />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -209,11 +194,7 @@ export const StatusForm = ({ data, close }) => {
         autoComplete="off"
         layout="vertical"
       >
-        <Form.Item
-          name="status"
-          label="Profile Status"
-          rules={[{ required: true, message: "Please select status" }]}
-        >
+        <Form.Item name="status" label="Profile Status" rules={[{ required: true, message: "Please select status" }]}>
           <Select placeholder="Select status" allowClear>
             <Option value="draft">Draft</Option>
             <Option value="completed">Completed</Option>
@@ -222,12 +203,7 @@ export const StatusForm = ({ data, close }) => {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update Status"}
           </Button>
         </Form.Item>
@@ -273,16 +249,8 @@ export const LanguagesForm = ({ data, close }) => {
               <>
                 {fields.map((field, index) => (
                   <Row>
-                    <Space
-                      key={field.key}
-                      align="baseline"
-                      style={{ marginLeft: "10px" }}
-                    >
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "name"]}
-                        fieldKey={[field.fieldKey, "name"]}
-                      >
+                    <Space key={field.key} align="baseline" style={{ marginLeft: "10px" }}>
+                      <Form.Item {...field} name={[field.name, "name"]} fieldKey={[field.fieldKey, "name"]}>
                         <Input placeholder="Language" />
                       </Form.Item>
                       <Form.Item
@@ -297,13 +265,7 @@ export const LanguagesForm = ({ data, close }) => {
                   </Row>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                    style={{ width: "200px" }}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} style={{ width: "200px" }}>
                     Add language
                   </Button>
                 </Form.Item>
@@ -312,12 +274,7 @@ export const LanguagesForm = ({ data, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -369,32 +326,19 @@ export const TechnicalSkillsForm = ({ data, close }) => {
                         display: "block",
                       }}
                     >{`Section Name ${index + 1}`}</label>
-                    <Form.Item
-                      {...field}
-                      name={[field.name, "sectionName"]}
-                      fieldKey={[field.fieldKey, "sectionName"]}
-                    >
+                    <Form.Item {...field} name={[field.name, "sectionName"]} fieldKey={[field.fieldKey, "sectionName"]}>
                       <Input placeholder="Section Name" />
                     </Form.Item>
                     <Form.List name={[field.name, "skills"]}>
-                      {(
-                        skillFields,
-                        { add: addSkill, remove: removeSkill }
-                      ) => (
+                      {(skillFields, { add: addSkill, remove: removeSkill }) => (
                         <>
                           {skillFields.map((skillField) => (
                             <Row>
                               <Space key={skillField.key} align="baseline">
-                                <Form.Item
-                                  {...skillField}
-                                  name={[skillField.name]}
-                                  fieldKey={[skillField.fieldKey]}
-                                >
+                                <Form.Item {...skillField} name={[skillField.name]} fieldKey={[skillField.fieldKey]}>
                                   <Input placeholder="Skill" />
                                 </Form.Item>
-                                <MinusCircleOutlined
-                                  onClick={() => removeSkill(skillField.name)}
-                                />
+                                <MinusCircleOutlined onClick={() => removeSkill(skillField.name)} />
                               </Space>
                             </Row>
                           ))}
@@ -425,12 +369,7 @@ export const TechnicalSkillsForm = ({ data, close }) => {
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Section
                   </Button>
                 </Form.Item>
@@ -439,12 +378,7 @@ export const TechnicalSkillsForm = ({ data, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -566,19 +500,12 @@ export const EducationForm = ({ data, close }) => {
                       Remove Education
                     </Button>
                     <div style={{ textAlign: "center" }}>
-                      <p>
-                        -----------------------------------------------------------
-                      </p>
+                      <p>-----------------------------------------------------------</p>
                     </div>
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Education
                   </Button>
                 </Form.Item>
@@ -587,12 +514,7 @@ export const EducationForm = ({ data, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -649,36 +571,18 @@ export const CoursesForm = ({ data, close }) => {
                     </Form.Item>
                     <Form.Item label="Courses Names">
                       <Form.List name={[field.name, "coursesNames"]}>
-                        {(
-                          courseFields,
-                          { add: addCourse, remove: removeCourse }
-                        ) => (
+                        {(courseFields, { add: addCourse, remove: removeCourse }) => (
                           <>
                             {courseFields.map((courseField) => (
-                              <Space
-                                key={courseField.key}
-                                style={{ display: "flex" }}
-                                align="baseline"
-                              >
-                                <Form.Item
-                                  {...courseField}
-                                  name={[courseField.name]}
-                                  fieldKey={[courseField.fieldKey]}
-                                >
+                              <Space key={courseField.key} style={{ display: "flex" }} align="baseline">
+                                <Form.Item {...courseField} name={[courseField.name]} fieldKey={[courseField.fieldKey]}>
                                   <Input placeholder="Course Name" />
                                 </Form.Item>
-                                <MinusCircleOutlined
-                                  onClick={() => removeCourse(courseField.name)}
-                                />
+                                <MinusCircleOutlined onClick={() => removeCourse(courseField.name)} />
                               </Space>
                             ))}
                             <Form.Item>
-                              <Button
-                                type="dashed"
-                                onClick={() => addCourse()}
-                                block
-                                icon={<PlusOutlined />}
-                              >
+                              <Button type="dashed" onClick={() => addCourse()} block icon={<PlusOutlined />}>
                                 Add Course Name
                               </Button>
                             </Form.Item>
@@ -698,12 +602,7 @@ export const CoursesForm = ({ data, close }) => {
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Course Provider
                   </Button>
                 </Form.Item>
@@ -712,12 +611,7 @@ export const CoursesForm = ({ data, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -822,12 +716,7 @@ export const AwardsForm = ({ data, close }) => {
                   </div>
                 ))}
                 <Form.Item wrapperCol={{ span: 24 }}>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Award
                   </Button>
                 </Form.Item>
@@ -836,12 +725,7 @@ export const AwardsForm = ({ data, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -938,51 +822,28 @@ export const ProjectsForm = ({ data, close }) => {
                     </Col>
 
                     <Col span={12}>
-                      <Form.Item
-                        label="Responsibilities"
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                      >
+                      <Form.Item label="Responsibilities" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
                         <Form.List name={[field.name, "responsibilities"]}>
-                          {(
-                            responsibilityFields,
-                            {
-                              add: addResponsibility,
-                              remove: removeResponsibility,
-                            }
-                          ) => (
+                          {(responsibilityFields, { add: addResponsibility, remove: removeResponsibility }) => (
                             <>
-                              {responsibilityFields.map(
-                                (responsibilityField) => (
-                                  <Space
-                                    key={responsibilityField.key}
-                                    style={{ display: "flex", marginBottom: 8 }}
-                                    align="baseline"
-                                  >
-                                    <Form.Item
-                                      {...responsibilityField}
-                                      name={[responsibilityField.name]}
-                                      fieldKey={[responsibilityField.fieldKey]}
-                                    >
-                                      <Input placeholder="Responsibility" />
-                                    </Form.Item>
-                                    <MinusCircleOutlined
-                                      onClick={() =>
-                                        removeResponsibility(
-                                          responsibilityField.name
-                                        )
-                                      }
-                                    />
-                                  </Space>
-                                )
-                              )}
-                              <Form.Item>
-                                <Button
-                                  type="dashed"
-                                  onClick={() => addResponsibility()}
-                                  block
-                                  icon={<PlusOutlined />}
+                              {responsibilityFields.map((responsibilityField) => (
+                                <Space
+                                  key={responsibilityField.key}
+                                  style={{ display: "flex", marginBottom: 8 }}
+                                  align="baseline"
                                 >
+                                  <Form.Item
+                                    {...responsibilityField}
+                                    name={[responsibilityField.name]}
+                                    fieldKey={[responsibilityField.fieldKey]}
+                                  >
+                                    <Input placeholder="Responsibility" />
+                                  </Form.Item>
+                                  <MinusCircleOutlined onClick={() => removeResponsibility(responsibilityField.name)} />
+                                </Space>
+                              ))}
+                              <Form.Item>
+                                <Button type="dashed" onClick={() => addResponsibility()} block icon={<PlusOutlined />}>
                                   Add Responsibility
                                 </Button>
                               </Form.Item>
@@ -992,16 +853,9 @@ export const ProjectsForm = ({ data, close }) => {
                       </Form.Item>
                     </Col>
                     <Col span={12}>
-                      <Form.Item
-                        label="Technologies"
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                      >
+                      <Form.Item label="Technologies" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
                         <Form.List name={[field.name, "technologies"]}>
-                          {(
-                            technologyFields,
-                            { add: addTechnology, remove: removeTechnology }
-                          ) => (
+                          {(technologyFields, { add: addTechnology, remove: removeTechnology }) => (
                             <>
                               {technologyFields.map((technologyField) => (
                                 <Space
@@ -1016,20 +870,11 @@ export const ProjectsForm = ({ data, close }) => {
                                   >
                                     <Input placeholder="Technology" />
                                   </Form.Item>
-                                  <MinusCircleOutlined
-                                    onClick={() =>
-                                      removeTechnology(technologyField.name)
-                                    }
-                                  />
+                                  <MinusCircleOutlined onClick={() => removeTechnology(technologyField.name)} />
                                 </Space>
                               ))}
                               <Form.Item>
-                                <Button
-                                  type="dashed"
-                                  onClick={() => addTechnology()}
-                                  block
-                                  icon={<PlusOutlined />}
-                                >
+                                <Button type="dashed" onClick={() => addTechnology()} block icon={<PlusOutlined />}>
                                   Add Technology
                                 </Button>
                               </Form.Item>
@@ -1040,24 +885,13 @@ export const ProjectsForm = ({ data, close }) => {
                     </Col>
                   </Col>
 
-                  <Button
-                    type="dashed"
-                    danger
-                    onClick={() => remove(field.name)}
-                    block
-                    icon={<MinusCircleOutlined />}
-                  >
+                  <Button type="dashed" danger onClick={() => remove(field.name)} block icon={<MinusCircleOutlined />}>
                     Remove project
                   </Button>
                 </div>
               ))}
               <Form.Item wrapperCol={{ span: 24 }}>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                >
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                   Add project
                 </Button>
               </Form.Item>
@@ -1065,12 +899,7 @@ export const ProjectsForm = ({ data, close }) => {
           )}
         </Form.List>
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -1149,14 +978,8 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
           >
             Responsibilities
           </label>
-          <Form.List
-            name={["responsibilitiesAndAccomplishments"]}
-            style={{ width: "100%" }}
-          >
-            {(
-              responsibilityFields,
-              { add: addResponsibility, remove: removeResponsibility }
-            ) => (
+          <Form.List name={["responsibilitiesAndAccomplishments"]} style={{ width: "100%" }}>
+            {(responsibilityFields, { add: addResponsibility, remove: removeResponsibility }) => (
               <>
                 {responsibilityFields.map((responsibilityField) => (
                   <div
@@ -1183,20 +1006,13 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                     </Form.Item>
 
                     <MinusCircleOutlined
-                      onClick={() =>
-                        removeResponsibility(responsibilityField.name)
-                      }
+                      onClick={() => removeResponsibility(responsibilityField.name)}
                       style={{ width: "10%", display: "block" }}
                     />
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => addResponsibility()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => addResponsibility()} block icon={<PlusOutlined />}>
                     Add Responsibility
                   </Button>
                 </Form.Item>
@@ -1228,12 +1044,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                         alignItems: "center",
                       }}
                     >
-                      <Form.Item
-                        {...restField}
-                        name={[name, "title"]}
-                        fieldKey={[fieldKey, "title"]}
-                        label="Title"
-                      >
+                      <Form.Item {...restField} name={[name, "title"]} fieldKey={[fieldKey, "title"]} label="Title">
                         <Input />
                       </Form.Item>
                       <Form.Item
@@ -1265,12 +1076,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Position
                   </Button>
                 </Form.Item>
@@ -1318,22 +1124,14 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                       >
                         <Input />
                       </Form.Item>
-                      <Form.Item
-                        {...restField}
-                        name={[name, "link"]}
-                        fieldKey={[fieldKey, "link"]}
-                        label="Link"
-                      >
+                      <Form.Item {...restField} name={[name, "link"]} fieldKey={[fieldKey, "link"]} label="Link">
                         <Input />
                       </Form.Item>
                       <MinusCircleOutlined onClick={() => remove(name)} />
                     </Space>
 
                     <Form.List name={[name, "responsibilities"]}>
-                      {(
-                        responsibilityFields,
-                        { add: addResponsibility, remove: removeResponsibility }
-                      ) => (
+                      {(responsibilityFields, { add: addResponsibility, remove: removeResponsibility }) => (
                         <>
                           <label
                             style={{
@@ -1344,10 +1142,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                           >
                             Project responsibilities
                           </label>
-                          <Form.Item
-                            label=""
-                            style={{ marginTop: "0px", marginBottom: "0px" }}
-                          >
+                          <Form.Item label="" style={{ marginTop: "0px", marginBottom: "0px" }}>
                             {responsibilityFields.map((responsibilityField) => (
                               <div
                                 key={responsibilityField.key}
@@ -1369,22 +1164,13 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                                   <Input />
                                 </Form.Item>
                                 <MinusCircleOutlined
-                                  onClick={() =>
-                                    removeResponsibility(
-                                      responsibilityField.name
-                                    )
-                                  }
+                                  onClick={() => removeResponsibility(responsibilityField.name)}
                                   style={{ width: "10%" }}
                                 />
                               </div>
                             ))}
                             <Form.Item>
-                              <Button
-                                type="dashed"
-                                onClick={() => addResponsibility()}
-                                block
-                                icon={<PlusOutlined />}
-                              >
+                              <Button type="dashed" onClick={() => addResponsibility()} block icon={<PlusOutlined />}>
                                 Add responsibility
                               </Button>
                             </Form.Item>
@@ -1395,12 +1181,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Project
                   </Button>
                 </Form.Item>
@@ -1433,11 +1214,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                         alignItems: "center",
                       }}
                     >
-                      <Form.Item
-                        {...restField}
-                        name={[name]}
-                        fieldKey={[fieldKey]}
-                      >
+                      <Form.Item {...restField} name={[name]} fieldKey={[fieldKey]}>
                         <Input />
                       </Form.Item>
                       <MinusCircleOutlined onClick={() => remove(name)} />
@@ -1445,12 +1222,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
                   </div>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Tool/Technology
                   </Button>
                 </Form.Item>
@@ -1464,12 +1236,7 @@ export const ExperienceForm = ({ data, experienceIndex, close }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -1519,10 +1286,7 @@ export const VolunteeringForm = ({ data, close }) => {
                       <Form.Item
                         {...field}
                         name={[field.name, "nameOfVolunteeringActivity"]}
-                        fieldKey={[
-                          field.fieldKey,
-                          "nameOfVolunteeringActivity",
-                        ]}
+                        fieldKey={[field.fieldKey, "nameOfVolunteeringActivity"]}
                         label="Activity name"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
@@ -1605,24 +1369,13 @@ export const VolunteeringForm = ({ data, close }) => {
                     </Col>
                   </Col>
 
-                  <Button
-                    type="dashed"
-                    danger
-                    onClick={() => remove(field.name)}
-                    block
-                    icon={<MinusCircleOutlined />}
-                  >
+                  <Button type="dashed" danger onClick={() => remove(field.name)} block icon={<MinusCircleOutlined />}>
                     Remove volunteering actiivty
                   </Button>
                 </div>
               ))}
               <Form.Item wrapperCol={{ span: 24 }}>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                >
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                   Add volunteering activity
                 </Button>
               </Form.Item>
@@ -1630,12 +1383,7 @@ export const VolunteeringForm = ({ data, close }) => {
           )}
         </Form.List>
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -1732,24 +1480,13 @@ export const RecommendationsForm = ({ data, close }) => {
                     </Col>
                   </Col>
 
-                  <Button
-                    type="dashed"
-                    danger
-                    onClick={() => remove(field.name)}
-                    block
-                    icon={<MinusCircleOutlined />}
-                  >
+                  <Button type="dashed" danger onClick={() => remove(field.name)} block icon={<MinusCircleOutlined />}>
                     Remove recommendation
                   </Button>
                 </div>
               ))}
               <Form.Item wrapperCol={{ span: 24 }}>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                >
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                   Add recommendation
                 </Button>
               </Form.Item>
@@ -1757,12 +1494,7 @@ export const RecommendationsForm = ({ data, close }) => {
           )}
         </Form.List>
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>
@@ -1816,19 +1548,14 @@ export const ExperiencesForm = ({ data, close }) => {
             <>
               {fields.map((field, index) => (
                 <div key={field.key} style={{ marginBottom: 20 }}>
-                  <h3 style={{ marginBottom: 10, fontSize: 20 }}>
-                    Experience {index + 1}
-                  </h3>
+                  <h3 style={{ marginBottom: 10, fontSize: 20 }}>Experience {index + 1}</h3>
                   <div className="w-100 h-px bg-Gray my-8"></div>
                   <Col span={24}>
                     <Col span={12}>
                       <Form.Item
                         {...field}
                         name={[field.name, "candidatesUniqueAchievement"]}
-                        fieldKey={[
-                          field.fieldKey,
-                          "candidatesUniqueAchievement",
-                        ]}
+                        fieldKey={[field.fieldKey, "candidatesUniqueAchievement"]}
                         label="Unique Achievement"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
@@ -1923,16 +1650,10 @@ export const ExperiencesForm = ({ data, close }) => {
                     </Col>
 
                     <Form.List name={[field.name, "positions"]}>
-                      {(
-                        positionFields,
-                        { add: addPosition, remove: removePosition }
-                      ) => (
+                      {(positionFields, { add: addPosition, remove: removePosition }) => (
                         <>
                           {positionFields.map((positionField) => (
-                            <div
-                              key={positionField.key}
-                              style={{ marginBottom: 20 }}
-                            >
+                            <div key={positionField.key} style={{ marginBottom: 20 }}>
                               <Col span={24}>
                                 <Col span={12}>
                                   <Form.Item
@@ -1949,14 +1670,8 @@ export const ExperiencesForm = ({ data, close }) => {
                                 <Col span={12}>
                                   <Form.Item
                                     {...positionField}
-                                    name={[
-                                      positionField.name,
-                                      "employmentType",
-                                    ]}
-                                    fieldKey={[
-                                      positionField.fieldKey,
-                                      "employmentType",
-                                    ]}
+                                    name={[positionField.name, "employmentType"]}
+                                    fieldKey={[positionField.fieldKey, "employmentType"]}
                                     label="Employment Type"
                                     labelCol={{ span: 8 }}
                                     wrapperCol={{ span: 16 }}
@@ -1968,10 +1683,7 @@ export const ExperiencesForm = ({ data, close }) => {
                                   <Form.Item
                                     {...positionField}
                                     name={[positionField.name, "startDate"]}
-                                    fieldKey={[
-                                      positionField.fieldKey,
-                                      "startDate",
-                                    ]}
+                                    fieldKey={[positionField.fieldKey, "startDate"]}
                                     label="Start Date"
                                     labelCol={{ span: 8 }}
                                     wrapperCol={{ span: 16 }}
@@ -1983,10 +1695,7 @@ export const ExperiencesForm = ({ data, close }) => {
                                   <Form.Item
                                     {...positionField}
                                     name={[positionField.name, "endDate"]}
-                                    fieldKey={[
-                                      positionField.fieldKey,
-                                      "endDate",
-                                    ]}
+                                    fieldKey={[positionField.fieldKey, "endDate"]}
                                     label="End Date"
                                     labelCol={{ span: 8 }}
                                     wrapperCol={{ span: 16 }}
@@ -1998,9 +1707,7 @@ export const ExperiencesForm = ({ data, close }) => {
                                   <Button
                                     type="dashed"
                                     danger
-                                    onClick={() =>
-                                      removePosition(positionField.name)
-                                    }
+                                    onClick={() => removePosition(positionField.name)}
                                     block
                                     icon={<MinusCircleOutlined />}
                                   >
@@ -2011,12 +1718,7 @@ export const ExperiencesForm = ({ data, close }) => {
                             </div>
                           ))}
                           <Form.Item wrapperCol={{ span: 24 }}>
-                            <Button
-                              type="dashed"
-                              onClick={() => addPosition()}
-                              block
-                              icon={<PlusOutlined />}
-                            >
+                            <Button type="dashed" onClick={() => addPosition()} block icon={<PlusOutlined />}>
                               Add Position
                             </Button>
                           </Form.Item>
@@ -2024,13 +1726,8 @@ export const ExperiencesForm = ({ data, close }) => {
                       )}
                     </Form.List>
 
-                    <Form.List
-                      name={[field.name, "responsibilitiesAndAccomplishments"]}
-                    >
-                      {(
-                        responsibilityFields,
-                        { add: addResponsibility, remove: removeResponsibility }
-                      ) => (
+                    <Form.List name={[field.name, "responsibilitiesAndAccomplishments"]}>
+                      {(responsibilityFields, { add: addResponsibility, remove: removeResponsibility }) => (
                         <>
                           {responsibilityFields.map((responsibilityField) => (
                             <Space
@@ -2045,20 +1742,11 @@ export const ExperiencesForm = ({ data, close }) => {
                               >
                                 <Input placeholder="Responsibility" />
                               </Form.Item>
-                              <MinusCircleOutlined
-                                onClick={() =>
-                                  removeResponsibility(responsibilityField.name)
-                                }
-                              />
+                              <MinusCircleOutlined onClick={() => removeResponsibility(responsibilityField.name)} />
                             </Space>
                           ))}
                           <Form.Item>
-                            <Button
-                              type="dashed"
-                              onClick={() => addResponsibility()}
-                              block
-                              icon={<PlusOutlined />}
-                            >
+                            <Button type="dashed" onClick={() => addResponsibility()} block icon={<PlusOutlined />}>
                               Add Responsibility
                             </Button>
                           </Form.Item>
@@ -2067,10 +1755,7 @@ export const ExperiencesForm = ({ data, close }) => {
                     </Form.List>
 
                     <Form.List name={[field.name, "toolsAndTechnologies"]}>
-                      {(
-                        technologyFields,
-                        { add: addTechnology, remove: removeTechnology }
-                      ) => (
+                      {(technologyFields, { add: addTechnology, remove: removeTechnology }) => (
                         <>
                           {technologyFields.map((technologyField) => (
                             <Space
@@ -2085,20 +1770,11 @@ export const ExperiencesForm = ({ data, close }) => {
                               >
                                 <Input placeholder="Technology" />
                               </Form.Item>
-                              <MinusCircleOutlined
-                                onClick={() =>
-                                  removeTechnology(technologyField.name)
-                                }
-                              />
+                              <MinusCircleOutlined onClick={() => removeTechnology(technologyField.name)} />
                             </Space>
                           ))}
                           <Form.Item>
-                            <Button
-                              type="dashed"
-                              onClick={() => addTechnology()}
-                              block
-                              icon={<PlusOutlined />}
-                            >
+                            <Button type="dashed" onClick={() => addTechnology()} block icon={<PlusOutlined />}>
                               Add Technology
                             </Button>
                           </Form.Item>
@@ -2120,12 +1796,7 @@ export const ExperiencesForm = ({ data, close }) => {
                 </div>
               ))}
               <Form.Item wrapperCol={{ span: 24 }}>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                >
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                   Add Experience
                 </Button>
               </Form.Item>
@@ -2134,12 +1805,7 @@ export const ExperiencesForm = ({ data, close }) => {
         </Form.List>
 
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
         </Form.Item>

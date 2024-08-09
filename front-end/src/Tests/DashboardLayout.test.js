@@ -7,12 +7,8 @@ import configureStore from "redux-mock-store";
 import DashboardLayout from "../Components/Layouts/DashboardLayout/DashboardLayout";
 
 // Mock the child components
-jest.mock("../Components/Layouts/DashboardLayout/AppMenu", () => () => (
-  <div data-testid="app-menu">App Menu</div>
-));
-jest.mock("../Components/Layouts/DashboardLayout/UserInfo", () => () => (
-  <div data-testid="user-info">User Info</div>
-));
+jest.mock("../Components/Layouts/DashboardLayout/AppMenu", () => () => <div data-testid="app-menu">App Menu</div>);
+jest.mock("../Components/Layouts/DashboardLayout/UserInfo", () => () => <div data-testid="user-info">User Info</div>);
 
 // Mock the Outlet component from react-router-dom
 jest.mock("react-router-dom", () => ({
@@ -45,18 +41,13 @@ describe("DashboardLayout", () => {
     renderComponent();
     const logo = screen.getByAltText("logo");
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute(
-      "src",
-      "https://talpods.io/img/talpods-white.svg"
-    );
+    expect(logo).toHaveAttribute("src", "https://talpods.io/img/talpods-white.svg");
   });
 
   test("renders footer with correct year", () => {
     renderComponent();
     const currentYear = new Date().getFullYear();
-    expect(
-      screen.getByText(`Talpods ©${currentYear} Created DevCrew`)
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Talpods ©${currentYear} Created DevCrew`)).toBeInTheDocument();
   });
 
   test("sider collapses and expands", () => {

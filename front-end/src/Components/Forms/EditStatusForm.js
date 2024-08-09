@@ -46,11 +46,7 @@ export const EditStatusForm = ({ data, close }) => {
         autoComplete="off"
         layout="vertical"
       >
-        <Form.Item
-          name="status"
-          label="Profile Status"
-          rules={[{ required: true, message: "Please select status" }]}
-        >
+        <Form.Item name="status" label="Profile Status" rules={[{ required: true, message: "Please select status" }]}>
           <Select placeholder="Select status" allowClear>
             <Option value="draft">Draft</Option>
             <Option value="completed">Completed</Option>
@@ -59,12 +55,7 @@ export const EditStatusForm = ({ data, close }) => {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Updating..." : "Update Status"}
           </Button>
         </Form.Item>

@@ -66,9 +66,7 @@ describe("UserInfo", () => {
   });
 
   test("handles missing user data gracefully", () => {
-    require("react-redux").useSelector.mockImplementation((selector) =>
-      selector({ auth: { user: null } })
-    );
+    require("react-redux").useSelector.mockImplementation((selector) => selector({ auth: { user: null } }));
     render(<UserInfo />);
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
     expect(screen.queryByText("Recruiter")).not.toBeInTheDocument();

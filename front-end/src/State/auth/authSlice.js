@@ -11,54 +11,45 @@ const initialState = {
   error: null,
 };
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(LOGIN_API, credentials);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue({
-        error: error.response.data.error,
-        status: error.response.status,
-      });
-    }
+export const login = createAsyncThunk("auth/login", async (credentials, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(LOGIN_API, credentials);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue({
+      error: error.response.data.error,
+      status: error.response.status,
+    });
   }
-);
+});
 
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const { auth } = getState();
-      await axios.put(LOGOUT_API, {
-        refreshToken: auth.refreshToken,
-        accessToken: auth.accessToken,
-      });
-      CookieManager.remove("accessToken");
-      CookieManager.remove("refreshToken");
-      delete axios.defaults.headers.common["Authorization"];
-      return null;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const logout = createAsyncThunk("auth/logout", async (_, { getState, rejectWithValue }) => {
+  try {
+    const { auth } = getState();
+    await axios.put(LOGOUT_API, {
+      refreshToken: auth.refreshToken,
+      accessToken: auth.accessToken,
+    });
+    CookieManager.remove("accessToken");
+    CookieManager.remove("refreshToken");
+    delete axios.defaults.headers.common["Authorization"];
+    return null;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
   }
-);
+});
 
-export const refreshToken = createAsyncThunk(
-  "auth/refreshToken",
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const { auth } = getState();
-      const response = await axios.put(REFRESH_TOKEN_API, {
-        refreshToken: auth.refreshToken,
-      });
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const refreshToken = createAsyncThunk("auth/refreshToken", async (_, { getState, rejectWithValue }) => {
+  try {
+    const { auth } = getState();
+    const response = await axios.put(REFRESH_TOKEN_API, {
+      refreshToken: auth.refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
   }
-);
+});
 
 const authSlice = createSlice({
   name: "auth",

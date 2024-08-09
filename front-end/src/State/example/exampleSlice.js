@@ -8,30 +8,24 @@ const initialState = {
 };
 
 // Async thunk to fetch data from a remote API
-export const fetchData = createAsyncThunk(
-  "example/fetchData",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get("https://api.example.com/data");
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.errors);
-    }
+export const fetchData = createAsyncThunk("example/fetchData", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get("https://api.example.com/data");
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.errors);
   }
-);
+});
 
 // Async thunk to post data to a remote API
-export const postData = createAsyncThunk(
-  "example/postData",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.post("https://api.example.com/post", data);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.errors);
-    }
+export const postData = createAsyncThunk("example/postData", async (data, thunkAPI) => {
+  try {
+    const response = await axios.post("https://api.example.com/post", data);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.errors);
   }
-);
+});
 
 export const exampleSlice = createSlice({
   name: "example",

@@ -1,9 +1,4 @@
-import {
-  DesktopOutlined,
-  LogoutOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { DesktopOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,8 +28,7 @@ function AppMenu() {
     user?.user.permissions?.profiles?.recruiter.includes("read") ||
     user?.user.permissions?.profiles?.admin.includes("read");
   const canViewUsers =
-    user?.user.permissions?.users?.recruiter.includes("read") ||
-    user?.user.permissions?.users?.admin.includes("read");
+    user?.user.permissions?.users?.recruiter.includes("read") || user?.user.permissions?.users?.admin.includes("read");
 
   const menuListItems = [
     {
@@ -79,17 +73,10 @@ function AppMenu() {
     },
   ];
 
-  const selectedKey = menuListItems.find(
-    (item) => item.label.props.to === location.pathname
-  )?.key;
+  const selectedKey = menuListItems.find((item) => item.label.props.to === location.pathname)?.key;
 
   return (
-    <Menu
-      theme="dark"
-      defaultSelectedKeys={["1"]}
-      selectedKeys={[selectedKey]}
-      mode="inline"
-    >
+    <Menu theme="dark" defaultSelectedKeys={["1"]} selectedKeys={[selectedKey]} mode="inline">
       {menuListItems
         .filter((item) => item.show)
         .map((item) => (

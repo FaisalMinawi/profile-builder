@@ -4,11 +4,7 @@ import EditBtn from "../UI/EditBtn";
 const Education = ({ data }) => {
   if (data.educations.length === 0) {
     return (
-      <section
-        id="education"
-        className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-        data-toggle
-      >
+      <section id="education" className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
         {/* Section title */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Education</h2>
@@ -18,11 +14,7 @@ const Education = ({ data }) => {
     );
   }
   return (
-    <section
-      id="education"
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
+    <section id="education" className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10" data-toggle>
       {/* Section title */}
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl">Education</h2>
@@ -55,14 +47,9 @@ const Education = ({ data }) => {
                   </div>
                 </div>
                 {/* Education desc */}
-                <div
-                  className={`education-desc pb-6 ${
-                    educationIndex === data.educations.length - 1 ? "" : "mb-6"
-                  }`}
-                >
+                <div className={`education-desc pb-6 ${educationIndex === data.educations.length - 1 ? "" : "mb-6"}`}>
                   <p>
-                    {education.level} ({education.major}){" "}
-                    {education.scoreGPA && `- CGPA: ${education.scoreGPA}`}
+                    {education.level} ({education.major}) {education.scoreGPA && `- CGPA: ${education.scoreGPA}`}
                   </p>
                   <p>
                     {education.location.cityState}, {education.location.country}

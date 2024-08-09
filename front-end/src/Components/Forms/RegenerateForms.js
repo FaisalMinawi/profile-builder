@@ -82,10 +82,7 @@ export const SummaryRegenerateForm = ({ data, close }) => {
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Key technical and non-technical strengths"
-          name="keyStrengths"
-        >
+        <Form.Item label="Key technical and non-technical strengths" name="keyStrengths">
           <Input.TextArea rows={4} />
         </Form.Item>
 
@@ -94,12 +91,7 @@ export const SummaryRegenerateForm = ({ data, close }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -154,12 +146,7 @@ export const SummaryRegenerateFormForJunior = ({ data, close }) => {
   return (
     <div className="container">
       <h2 className="title">Profile summary</h2>
-      <Form
-        form={form}
-        name="profileSummary"
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form form={form} name="profileSummary" layout="vertical" onFinish={onFinish}>
         <Form.Item label="First name" name="firstName">
           <Input disabled={true} />
         </Form.Item>
@@ -167,29 +154,16 @@ export const SummaryRegenerateFormForJunior = ({ data, close }) => {
           <Input disabled={true} />
         </Form.Item>
 
-        <Form.Item
-          label="Passions and interests"
-          name="passion"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Passions and interests" name="passion" rules={[{ required: true }]}>
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Evaluation"
-          name="evaluation"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Evaluation" name="evaluation" rules={[{ required: true }]}>
           <Input.TextArea rows={4} />
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -228,12 +202,7 @@ export const ExperienceSummary = ({ data, experienceIndex, close }) => {
   return (
     <div className="container">
       <h2 className="title">Experience summary</h2>
-      <Form
-        name="experienceSummary"
-        initialValues={experienceData}
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form name="experienceSummary" initialValues={experienceData} layout="vertical" onFinish={onFinish}>
         <Form.Item label="First name" name="firstName" initialValue={firstName}>
           <Input />
         </Form.Item>
@@ -251,34 +220,20 @@ export const ExperienceSummary = ({ data, experienceIndex, close }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Candidate's unique achievement"
-          name="candidatesUniqueAchievement"
-        >
+        <Form.Item label="Candidate's unique achievement" name="candidatesUniqueAchievement">
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Responsibilities and accomplishments"
-          name="responsibilitiesAndAccomplishments"
-        >
+        <Form.Item label="Responsibilities and accomplishments" name="responsibilitiesAndAccomplishments">
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Tools and technologies used"
-          name="toolsAndTechnologies"
-        >
+        <Form.Item label="Tools and technologies used" name="toolsAndTechnologies">
           <Input.TextArea rows={4} />
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -287,16 +242,11 @@ export const ExperienceSummary = ({ data, experienceIndex, close }) => {
   );
 };
 
-export const ExperienceResponsibilities = ({
-  data,
-  experienceIndex,
-  close,
-}) => {
+export const ExperienceResponsibilities = ({ data, experienceIndex, close }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const index = experienceIndex;
-  const propertyName =
-    "experiences." + index + ".responsibilitiesAndAccomplishments";
+  const propertyName = "experiences." + index + ".responsibilitiesAndAccomplishments";
   const experienceData = data.experiences[index];
   const { firstName, seniority, slug } = data;
 
@@ -321,12 +271,7 @@ export const ExperienceResponsibilities = ({
   return (
     <div className="container">
       <h2 className="title">Experience responsibilities</h2>
-      <Form
-        name="experienceResponsibilities"
-        initialValues={experienceData}
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form name="experienceResponsibilities" initialValues={experienceData} layout="vertical" onFinish={onFinish}>
         <Form.Item label="First name" name="firstName" initialValue={firstName}>
           <Input />
         </Form.Item>
@@ -344,34 +289,20 @@ export const ExperienceResponsibilities = ({
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Candidate's unique achievement"
-          name="candidatesUniqueAchievement"
-        >
+        <Form.Item label="Candidate's unique achievement" name="candidatesUniqueAchievement">
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Responsibilities and accomplishments"
-          name="responsibilitiesAndAccomplishments"
-        >
+        <Form.Item label="Responsibilities and accomplishments" name="responsibilitiesAndAccomplishments">
           <Input.TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item
-          label="Tools and technologies used"
-          name="toolsAndTechnologies"
-        >
+        <Form.Item label="Tools and technologies used" name="toolsAndTechnologies">
           <Input.TextArea rows={4} />
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -424,22 +355,12 @@ export const CandidateTechnicalSkills = ({ data, close }) => {
   return (
     <div className="container">
       <h2 className="title">Candidate Technical Skills</h2>
-      <Form
-        name="technicalSkillsForm"
-        layout="vertical"
-        form={form}
-        onFinish={onFinish}
-      >
+      <Form name="technicalSkillsForm" layout="vertical" form={form} onFinish={onFinish}>
         <Form.Item label="Technical skills" name="skills">
           <Input.TextArea rows={4} />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -478,12 +399,7 @@ export const AdditionalProjects = ({ data, projectIndex, close }) => {
   return (
     <div className="container">
       <h2 className="title">Additional Projects</h2>
-      <Form
-        name="projects_form"
-        onFinish={onFinish}
-        initialValues={projectData}
-        layout="vertical"
-      >
+      <Form name="projects_form" onFinish={onFinish} initialValues={projectData} layout="vertical">
         <Form.Item name="projectName" label="Project Name">
           <Input placeholder="Project Name" />
         </Form.Item>
@@ -501,28 +417,15 @@ export const AdditionalProjects = ({ data, projectIndex, close }) => {
             {(fields, { add, remove }) => (
               <>
                 {fields.map((field) => (
-                  <Space
-                    key={field.key}
-                    style={{ display: "flex" }}
-                    align="baseline"
-                  >
-                    <Form.Item
-                      {...field}
-                      name={[field.name]}
-                      fieldKey={[field.fieldKey]}
-                    >
+                  <Space key={field.key} style={{ display: "flex" }} align="baseline">
+                    <Form.Item {...field} name={[field.name]} fieldKey={[field.fieldKey]}>
                       <Input placeholder="Responsibility" />
                     </Form.Item>
                     <MinusCircleOutlined onClick={() => remove(field.name)} />
                   </Space>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Responsibility
                   </Button>
                 </Form.Item>
@@ -535,28 +438,15 @@ export const AdditionalProjects = ({ data, projectIndex, close }) => {
             {(fields, { add, remove }) => (
               <>
                 {fields.map((field) => (
-                  <Space
-                    key={field.key}
-                    style={{ display: "flex" }}
-                    align="baseline"
-                  >
-                    <Form.Item
-                      {...field}
-                      name={[field.name]}
-                      fieldKey={[field.fieldKey]}
-                    >
+                  <Space key={field.key} style={{ display: "flex" }} align="baseline">
+                    <Form.Item {...field} name={[field.name]} fieldKey={[field.fieldKey]}>
                       <Input placeholder="Technology" />
                     </Form.Item>
                     <MinusCircleOutlined onClick={() => remove(field.name)} />
                   </Space>
                 ))}
                 <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                     Add Technology
                   </Button>
                 </Form.Item>
@@ -565,12 +455,7 @@ export const AdditionalProjects = ({ data, projectIndex, close }) => {
           </Form.List>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
@@ -579,11 +464,7 @@ export const AdditionalProjects = ({ data, projectIndex, close }) => {
   );
 };
 
-export const RecommendationRegenerateForm = ({
-  data,
-  recommendationIndex,
-  close,
-}) => {
+export const RecommendationRegenerateForm = ({ data, recommendationIndex, close }) => {
   const { slug } = data;
   const index = recommendationIndex;
   const formData = data.recommendations[index].recommendationText;
@@ -613,20 +494,11 @@ export const RecommendationRegenerateForm = ({
     <div className="container">
       <h2 className="title">Profile summary</h2>
       <Form layout="vertical" onFinish={onFinish}>
-        <Form.Item
-          label="Recommendation Text"
-          name="recommendationText"
-          initialValue={formData}
-        >
+        <Form.Item label="Recommendation Text" name="recommendationText" initialValue={formData}>
           <Input.TextArea name="recommendationText" rows={4} />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="re-generate-button"
-            disabled={loading}
-          >
+          <Button type="primary" htmlType="submit" className="re-generate-button" disabled={loading}>
             {loading ? "Regenerating..." : "Regenerate"}
           </Button>
         </Form.Item>
