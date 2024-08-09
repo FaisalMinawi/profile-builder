@@ -32,14 +32,8 @@ describe("ProfileService", () => {
         profiles: mockMappedProfiles,
         lastEvaluatedKey: null,
       });
-      expect(ProfileRepository.getAllProfiles).toHaveBeenCalledWith(
-        "draft",
-        10,
-        null
-      );
-      expect(entityMapper.mapProfileData).toHaveBeenCalledWith(
-        mockRawProfiles
-      );
+      expect(ProfileRepository.getAllProfiles).toHaveBeenCalledWith("draft", 10, null);
+      expect(entityMapper.mapProfileData).toHaveBeenCalledWith(mockRawProfiles);
     });
 
     it("should return null when no profiles are found", async () => {
@@ -90,20 +84,10 @@ describe("ProfileService", () => {
 
       FileRepository.uploadFile.mockResolvedValue(mockUploadResult);
 
-      const result = await ProfileService.uploadFile(
-        mockFile,
-        "publicBucket",
-        "photo",
-        "test-slug"
-      );
+      const result = await ProfileService.uploadFile(mockFile, "publicBucket", "photo", "test-slug");
 
       expect(result).toEqual(mockUploadResult);
-      expect(FileRepository.uploadFile).toHaveBeenCalledWith(
-        mockFile,
-        "publicBucket",
-        "photo",
-        "test-slug"
-      );
+      expect(FileRepository.uploadFile).toHaveBeenCalledWith(mockFile, "publicBucket", "photo", "test-slug");
     });
 
     it("should handle error", async () => {
@@ -113,9 +97,9 @@ describe("ProfileService", () => {
       };
       FileRepository.uploadFile.mockRejectedValue(new Error("S3 error"));
 
-      await expect(
-        ProfileService.uploadFile(mockFile, "publicBucket", "photo", "test-slug")
-      ).rejects.toThrow("S3 error");
+      await expect(ProfileService.uploadFile(mockFile, "publicBucket", "photo", "test-slug")).rejects.toThrow(
+        "S3 error"
+      );
     });
   });
 
@@ -127,29 +111,21 @@ describe("ProfileService", () => {
       const result = await ProfileService.deleteFile("test-slug", "photo", "test.jpg");
 
       expect(result).toEqual({});
-      expect(ProfileRepository.updateProfileAttribute).toHaveBeenCalledWith(
-        "test-slug",
-        "photo",
-        ""
-      );
+      expect(ProfileRepository.updateProfileAttribute).toHaveBeenCalledWith("test-slug", "photo", "");
       expect(FileRepository.deleteFile).toHaveBeenCalledWith("test.jpg");
     });
 
     it("should handle error when updating profile attribute", async () => {
       ProfileRepository.updateProfileAttribute.mockRejectedValue(new Error("DynamoDB error"));
 
-      await expect(
-        ProfileService.deleteFile("test-slug", "photo", "test.jpg")
-      ).rejects.toThrow("DynamoDB error");
+      await expect(ProfileService.deleteFile("test-slug", "photo", "test.jpg")).rejects.toThrow("DynamoDB error");
     });
 
     it("should handle error when deleting file", async () => {
       ProfileRepository.updateProfileAttribute.mockResolvedValue(true);
       FileRepository.deleteFile.mockRejectedValue(new Error("S3 error"));
 
-      await expect(
-        ProfileService.deleteFile("test-slug", "photo", "test.jpg")
-      ).rejects.toThrow("S3 error");
+      await expect(ProfileService.deleteFile("test-slug", "photo", "test.jpg")).rejects.toThrow("S3 error");
     });
   });
 
@@ -168,10 +144,7 @@ describe("ProfileService", () => {
       entityMapper.mapNewProfile.mockReturnValue(mockProfile);
       ProfileRepository.createProfile.mockResolvedValue(true);
 
-      const result = await ProfileService.createProfile(
-        mockBody,
-        mockUploadedFiles
-      );
+      const result = await ProfileService.createProfile(mockBody, mockUploadedFiles);
 
       expect(result).toEqual(mockProfile);
       expect(ProfileRepository.createProfile).toHaveBeenCalledWith(mockProfile);
@@ -191,9 +164,7 @@ describe("ProfileService", () => {
       entityMapper.mapNewProfile.mockReturnValue(mockProfile);
       ProfileRepository.createProfile.mockRejectedValue(new Error("DynamoDB error"));
 
-      await expect(
-        ProfileService.createProfile(mockBody, mockUploadedFiles)
-      ).rejects.toThrow("DynamoDB error");
+      await expect(ProfileService.createProfile(mockBody, mockUploadedFiles)).rejects.toThrow("DynamoDB error");
     });
   });
 
@@ -343,9 +314,7 @@ describe("ProfileService", () => {
       ProfileRepository.getProfile.mockResolvedValue(mockOldItem);
       ProfileRepository.updatedProfile.mockRejectedValue(new Error("DynamoDB error"));
 
-      await expect(
-        ProfileService.updatedProfile(mockBody, mockUploadedFiles)
-      ).rejects.toThrow("DynamoDB error");
+      await expect(ProfileService.updatedProfile(mockBody, mockUploadedFiles)).rejects.toThrow("DynamoDB error");
     });
 
     it("should update slug if changed", async () => {

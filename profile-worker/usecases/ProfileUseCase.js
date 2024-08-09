@@ -16,10 +16,7 @@ class ProfileUseCase {
 
   static async updateProfile(slug, updateData) {
     try {
-      const updatedProfile = await ProfileRepository.updateProfile(
-        slug,
-        updateData
-      );
+      const updatedProfile = await ProfileRepository.updateProfile(slug, updateData);
       return updatedProfile;
     } catch (error) {
       console.error("Error updating profile:", error.message);

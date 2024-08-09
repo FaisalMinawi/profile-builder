@@ -1,14 +1,6 @@
 class PromptService {
   static async profileSummaryPrompt(data) {
-    const {
-      yearsExperience,
-      uniqueness,
-      keyStrengths,
-      seniority,
-      domainExperience,
-      level,
-      firstName,
-    } = data;
+    const { yearsExperience, uniqueness, keyStrengths, seniority, domainExperience, level, firstName } = data;
     const prompt = `"Use the following information to write the summary section of this candidate’s CV. Make it appealing to hiring managers for a software engineering role:
 
 Years of experience: ${yearsExperience}
@@ -29,15 +21,7 @@ if one of the properties provided is not valid, or undefined don't use it.`;
     return prompt;
   }
   static async profileSummaryPromptForJunior(data) {
-    const {
-      level,
-      firstName,
-      passion,
-      eductions,
-      volunteering,
-      additionalProject,
-      evaluation,
-    } = data;
+    const { level, firstName, passion, eductions, volunteering, additionalProject, evaluation } = data;
     const prompt = `Use the following information to write the summary section of this candidate’s CV. Make it appealing to hiring managers for an entry-level software engineering role, highlighting the following inputs:
 
 1. First name: ${firstName}
@@ -143,13 +127,7 @@ Use active voice and impactful verbs to convey the candidate's proactive approac
   }
 
   static async projectSummaryPrompt(data) {
-    const {
-      projectName,
-      responsibilities,
-      technologies,
-      firstName,
-      description,
-    } = data;
+    const { projectName, responsibilities, technologies, firstName, description } = data;
     const prompt = `
     project name: ${projectName} 
     Responsibilities: ${responsibilities}

@@ -27,10 +27,7 @@ exports.generateProfile = async (slug) => {
 
       if (isValid) {
         console.log(`Valid response generated on attempt ${attempt}`);
-        const update = await ProfileService.updateProfile(
-          slug,
-          JSON.parse(result)
-        );
+        const update = await ProfileService.updateProfile(slug, JSON.parse(result));
         await ProfileService.updateProfileProperty(slug, "status", "draft");
         return result;
       } else {
@@ -38,11 +35,7 @@ exports.generateProfile = async (slug) => {
       }
     } catch (error) {
       console.error(`Error on attempt ${attempt}:`, error);
-      await ProfileService.updateProfileProperty(
-        slug,
-        "error",
-        `Error on attempt ${attempt}:, ${error}`
-      );
+      await ProfileService.updateProfileProperty(slug, "error", `Error on attempt ${attempt}:, ${error}`);
       await ProfileService.updateProfileProperty(slug, "status", "error");
 
       if (attempt === maxAttempts) {
@@ -59,9 +52,7 @@ exports.generateProfile = async (slug) => {
     );
     await ProfileService.updateProfileProperty(slug, "status", "error");
 
-    throw new Error(
-      `Failed to generate a valid response after ${maxAttempts} attempts`
-    );
+    throw new Error(`Failed to generate a valid response after ${maxAttempts} attempts`);
   }
 };
 

@@ -1,8 +1,8 @@
-const express = require('express');
-const helloRoutes = require('./routes/helloRoutes');
-const config = require('./config/config');
+const express = require("express");
+const helloRoutes = require("./routes/helloRoutes");
+const config = require("./config/config");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 
@@ -10,12 +10,12 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use('/api', helloRoutes);
+app.use("/api", helloRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
 module.exports = app;

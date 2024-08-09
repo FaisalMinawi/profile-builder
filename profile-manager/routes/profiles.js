@@ -13,10 +13,7 @@ router.get("/:slug", profileController.getProfileData);
 
 router.delete("/:slug", profileController.deleteProfile);
 
-router.put(
-  "/regenerateAndUpdateProfile/:slug",
-  profileController.regenerateAndUpdateProfile
-);
+router.put("/regenerateAndUpdateProfile/:slug", profileController.regenerateAndUpdateProfile);
 router.put("/updateData/:slug", profileController.updateProfileData);
 
 router.post(

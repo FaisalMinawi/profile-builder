@@ -40,26 +40,26 @@ To run this project, you need to have the following installed:
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/talpods/profile-builder.git
-    cd profile-builder
-    ```
+   ```bash
+   git clone https://github.com/talpods/profile-builder.git
+   cd profile-builder
+   ```
 
 2. **Install dependencies:**
 
-    For Lambda functions:
+   For Lambda functions:
 
-    ```bash
-    cd path/to/lambda/function
-    npm install
-    ```
+   ```bash
+   cd path/to/lambda/function
+   npm install
+   ```
 
-    For frontend:
+   For frontend:
 
-    ```bash
-    cd frontend
-    npm install
-    ```
+   ```bash
+   cd frontend
+   npm install
+   ```
 
 ### Deployment
 

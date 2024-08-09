@@ -1,12 +1,12 @@
-import slugController from '../../controllers/slugController.js';
-import slugUsecase from '../../usecases/slugUsecase.js';
+import slugController from "../../controllers/slugController.js";
+import slugUsecase from "../../usecases/slugUsecase.js";
 
 // Mocking the usecase module
-jest.mock('../../usecases/slugUsecase.js', () => ({
+jest.mock("../../usecases/slugUsecase.js", () => ({
   slugHandler: jest.fn(),
 }));
 
-describe('slugController', () => {
+describe("slugController", () => {
   let mockReq;
   let mockRes;
 
@@ -14,8 +14,8 @@ describe('slugController', () => {
     // Mock Express request and response objects
     mockReq = {
       params: {
-        firstName: 'John',
-        lastName: 'Doe',
+        firstName: "John",
+        lastName: "Doe",
       },
     };
     mockRes = {
@@ -28,9 +28,9 @@ describe('slugController', () => {
     jest.clearAllMocks();
   });
 
-  it('should return profiles when slugHandler succeeds', async () => {
+  it("should return profiles when slugHandler succeeds", async () => {
     // Mock successful response from slugUsecase.slugHandler
-    const mockProfiles = [{ name: 'Profile 1' }, { name: 'Profile 2' }];
+    const mockProfiles = [{ name: "Profile 1" }, { name: "Profile 2" }];
     slugUsecase.slugHandler.mockResolvedValue(mockProfiles);
 
     // Call the controller method
@@ -41,12 +41,12 @@ describe('slugController', () => {
     expect(mockRes.json).toHaveBeenCalledWith(mockProfiles);
 
     // Verify slugUsecase.slugHandler was called with correct parameters
-    expect(slugUsecase.slugHandler).toHaveBeenCalledWith('John', 'Doe');
+    expect(slugUsecase.slugHandler).toHaveBeenCalledWith("John", "Doe");
   });
 
-  it('should return 500 status and error message when slugHandler throws an error', async () => {
+  it("should return 500 status and error message when slugHandler throws an error", async () => {
     // Mock error response from slugUsecase.slugHandler
-    const mockError = new Error('Test error');
+    const mockError = new Error("Test error");
     slugUsecase.slugHandler.mockRejectedValue(mockError);
 
     // Call the controller method
@@ -57,6 +57,6 @@ describe('slugController', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ error: mockError.message });
 
     // Verify slugUsecase.slugHandler was called with correct parameters
-    expect(slugUsecase.slugHandler).toHaveBeenCalledWith('John', 'Doe');
+    expect(slugUsecase.slugHandler).toHaveBeenCalledWith("John", "Doe");
   });
 });

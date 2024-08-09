@@ -18,9 +18,7 @@ exports.validateResponse = (inputString) => {
     "courses",
   ];
 
-  const missingProperties = requiredProperties.filter(
-    (prop) => !inputString.includes(prop)
-  );
+  const missingProperties = requiredProperties.filter((prop) => !inputString.includes(prop));
 
   if (missingProperties.length === 0) {
     console.log("Validation successful. All required properties are present.");

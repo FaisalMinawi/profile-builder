@@ -1,7 +1,7 @@
-const userService = require('../services/userService');
+const userService = require("../services/userService");
 
 async function saveUser(user) {
-    await userService.saveUser(user);
+  await userService.saveUser(user);
 }
 
 module.exports = saveUser;

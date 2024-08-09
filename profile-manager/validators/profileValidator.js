@@ -11,15 +11,14 @@ class ProfileValidator {
       "targetRole",
       "profileNumber",
       "slug",
-      "email"
+      "email",
     ];
     const urlFields = ["linkedInLink", "githubLink", "scoreSheetLink"];
     const slugRegex = /^[a-z]+-[a-z]+[0-9]*$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     requiredFields.forEach((field) => {
-      if (!data[field])
-        errors[field] = `${this.formatFieldName(field)} is required.`;
+      if (!data[field]) errors[field] = `${this.formatFieldName(field)} is required.`;
     });
 
     if (data.slug && !slugRegex.test(data.slug)) {
@@ -31,11 +30,11 @@ class ProfileValidator {
     }
 
     urlFields.forEach((field) => {
-      if(data[field] !== "null"){
-      if (!validator.isURL(data[field])) {
-        errors[field] = `Invalid ${this.formatFieldName(field)}.`;
+      if (data[field] !== "null") {
+        if (!validator.isURL(data[field])) {
+          errors[field] = `Invalid ${this.formatFieldName(field)}.`;
+        }
       }
-    }
     });
 
     this.throwIfErrors(errors);
@@ -70,32 +69,21 @@ class ProfileValidator {
         this.validateFileType(file, fileType, errors);
         this.validateFileSize(file, errors);
       }
-  });
+    });
 
     this.throwIfErrors(errors);
   }
 
-
-
   static validateFileType(file, fileType, errors) {
-    const allowedFormats =
-      fileType === "photo"
-        ? config.allowedImageFormats
-        : config.allowedDocFormats;
+    const allowedFormats = fileType === "photo" ? config.allowedImageFormats : config.allowedDocFormats;
     if (!allowedFormats.includes(file.mimetype)) {
-      errors[
-        fileType
-      ] = `Invalid ${fileType} format. Allowed formats: ${allowedFormats.join(
-        ", "
-      )}.`;
+      errors[fileType] = `Invalid ${fileType} format. Allowed formats: ${allowedFormats.join(", ")}.`;
     }
   }
 
   static validateFileSize(file, errors) {
     if (file.size > config.maxSize) {
-      errors[file.fieldname] = `${this.formatFieldName(
-        file.fieldname
-      )} size exceeds the limit of 5MB.`;
+      errors[file.fieldname] = `${this.formatFieldName(file.fieldname)} size exceeds the limit of 5MB.`;
     }
   }
 

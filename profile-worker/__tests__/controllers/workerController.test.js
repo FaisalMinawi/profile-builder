@@ -18,9 +18,7 @@ describe("Worker Controller", () => {
       const mockResult = { profile: "Generated Profile" };
       generateProfile.mockResolvedValue(mockResult);
 
-      const response = await request(app)
-        .post("/generateProfile")
-        .send({ slug: "sample-slug" });
+      const response = await request(app).post("/generateProfile").send({ slug: "sample-slug" });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockResult);
@@ -30,9 +28,7 @@ describe("Worker Controller", () => {
     it("should return 500 if there is a server error", async () => {
       generateProfile.mockRejectedValue(new Error("Internal server error"));
 
-      const response = await request(app)
-        .post("/generateProfile")
-        .send({ slug: "sample-slug" });
+      const response = await request(app).post("/generateProfile").send({ slug: "sample-slug" });
 
       expect(response.status).toBe(500);
       expect(response.body).toEqual({ error: "Internal server error" });
@@ -44,25 +40,17 @@ describe("Worker Controller", () => {
       const mockResult = { text: "Parsed text from document" };
       downloadAndParseDocument.mockResolvedValue(mockResult);
 
-      const response = await request(app)
-        .post("/fileToText")
-        .send({ url: "http://example.com/document.pdf" });
+      const response = await request(app).post("/fileToText").send({ url: "http://example.com/document.pdf" });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockResult);
-      expect(downloadAndParseDocument).toHaveBeenCalledWith(
-        "http://example.com/document.pdf"
-      );
+      expect(downloadAndParseDocument).toHaveBeenCalledWith("http://example.com/document.pdf");
     });
 
     it("should return 500 if there is a server error", async () => {
-      downloadAndParseDocument.mockRejectedValue(
-        new Error("Internal server error")
-      );
+      downloadAndParseDocument.mockRejectedValue(new Error("Internal server error"));
 
-      const response = await request(app)
-        .post("/fileToText")
-        .send({ url: "http://example.com/document.pdf" });
+      const response = await request(app).post("/fileToText").send({ url: "http://example.com/document.pdf" });
 
       console.log("fileToText error response:", response.body);
 

@@ -12,9 +12,7 @@ async function downloadAndParseDocument(buffer, key) {
     const result = await mammoth.extractRawText({ buffer: buffer });
     text = result.value;
   } else {
-    throw new Error(
-      "Unsupported file type. Please provide a PDF or DOCX file URL."
-    );
+    throw new Error("Unsupported file type. Please provide a PDF or DOCX file URL.");
   }
 
   return text;

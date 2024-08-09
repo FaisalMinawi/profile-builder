@@ -1,9 +1,9 @@
-const tokenManager = require('../infrastructure/tokenManager');
-const dynamoDbClient = require('../infrastructure/dynamoDbClient');
-const config = require('../config/config');
-jest.mock('../infrastructure/dynamoDbClient');
+const tokenManager = require("../infrastructure/tokenManager");
+const dynamoDbClient = require("../infrastructure/dynamoDbClient");
+const config = require("../config/config");
+jest.mock("../infrastructure/dynamoDbClient");
 
-describe('tokenManager', () => {
+describe("tokenManager", () => {
   const mockPut = jest.fn();
   const mockUpdate = jest.fn();
   const mockGet = jest.fn();
@@ -24,12 +24,12 @@ describe('tokenManager', () => {
     jest.clearAllMocks();
   });
 
-  describe('storeToken', () => {
-    it('should store the token in DynamoDB', async () => {
-      const accessToken = 'testToken';
-      const refreshToken = 'testToken';
-      const accessTokenExpiration = '1541684';
-      const refreshTokenExpiration = '5494644';
+  describe("storeToken", () => {
+    it("should store the token in DynamoDB", async () => {
+      const accessToken = "testToken";
+      const refreshToken = "testToken";
+      const accessTokenExpiration = "1541684";
+      const refreshTokenExpiration = "5494644";
       const refreshTokenInvalidated = false;
       mockPut.mockResolvedValueOnce({});
 
@@ -44,7 +44,7 @@ describe('tokenManager', () => {
       expect(dynamoDbClient.put).toHaveBeenCalledWith({
         TableName: config.dynamoDbTable,
         Item: {
-          PK: 'tokens',
+          PK: "tokens",
           SK: `tokens#${refreshToken}`,
           accessToken,
           accessTokenExpiration,
@@ -57,9 +57,9 @@ describe('tokenManager', () => {
     });
   });
 
-  describe('invalidateToken', () => {
-    it('should invalidate the token in DynamoDB', async () => {
-      const refreshToken = 'testToken';
+  describe("invalidateToken", () => {
+    it("should invalidate the token in DynamoDB", async () => {
+      const refreshToken = "testToken";
       mockUpdate.mockResolvedValueOnce({});
 
       await tokenManager.invalidateToken(refreshToken);
@@ -67,20 +67,20 @@ describe('tokenManager', () => {
       expect(dynamoDbClient.update).toHaveBeenCalledWith({
         TableName: config.dynamoDbTable,
         Key: {
-          PK: 'tokens',
+          PK: "tokens",
           SK: `tokens#${refreshToken}`,
         },
-        UpdateExpression: 'set invalidated = :invalidated',
+        UpdateExpression: "set invalidated = :invalidated",
         ExpressionAttributeValues: {
-          ':invalidated': true,
+          ":invalidated": true,
         },
       });
     });
   });
 
-  describe('isTokenInvalidated', () => {
-    it('should return true if the token is invalidated', async () => {
-      const refreshToken = 'testToken';
+  describe("isTokenInvalidated", () => {
+    it("should return true if the token is invalidated", async () => {
+      const refreshToken = "testToken";
       mockGet.mockResolvedValueOnce({
         Item: {
           invalidated: true,
@@ -92,15 +92,15 @@ describe('tokenManager', () => {
       expect(dynamoDbClient.get).toHaveBeenCalledWith({
         TableName: config.dynamoDbTable,
         Key: {
-          PK: 'tokens',
+          PK: "tokens",
           SK: `tokens#${refreshToken}`,
         },
       });
       expect(result).toBe(true);
     });
 
-    it('should return false if the token is not invalidated', async () => {
-      const refreshToken = 'testToken';
+    it("should return false if the token is not invalidated", async () => {
+      const refreshToken = "testToken";
       mockGet.mockResolvedValueOnce({
         Item: {
           invalidated: false,
@@ -112,7 +112,7 @@ describe('tokenManager', () => {
       expect(dynamoDbClient.get).toHaveBeenCalledWith({
         TableName: config.dynamoDbTable,
         Key: {
-          PK: 'tokens',
+          PK: "tokens",
           SK: `tokens#${refreshToken}`,
         },
       });

@@ -1,6 +1,6 @@
-const dynamoDbClient = require('./dynamoDbClient');
-const config = require('../config/config');
-const bcrypt = require('bcrypt');
+const dynamoDbClient = require("./dynamoDbClient");
+const config = require("../config/config");
+const bcrypt = require("bcrypt");
 
 class userManagmentRepo {
   async getAllUsers() {
@@ -21,12 +21,12 @@ class userManagmentRepo {
     if (!allUsers) {
       return null;
     } else {
-      const usersList = allUsers.map(user => ({
+      const usersList = allUsers.map((user) => ({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         roles: user.acl.roles,
-        createdAt: user.createdAt
+        createdAt: user.createdAt,
       }));
       return usersList;
     }
@@ -41,7 +41,7 @@ class userManagmentRepo {
       },
       ExpressionAttributeValues: {
         ":pkVal": config.PK,
-        ":skVal": `${config.SK}`+"#"+`${email}`,
+        ":skVal": `${config.SK}` + "#" + `${email}`,
       },
     };
     const result = await dynamoDbClient.query(params).promise();
@@ -53,7 +53,7 @@ class userManagmentRepo {
       TableName: config.dynamoDbTable,
       Item: {
         pk: config.PK,
-        sk: `${config.SK}`+"#"+`${email}`,
+        sk: `${config.SK}` + "#" + `${email}`,
         email: email,
         password: hashedPassword,
         firstName: firstName,
@@ -76,17 +76,15 @@ class userManagmentRepo {
           },
           roles: roles,
         },
-      }
+      },
     };
 
-
     try {
-      
       await dynamoDbClient.put(params).promise();
-      return { success: true, message: 'User created successfully' };
+      return { success: true, message: "User created successfully" };
     } catch (error) {
-      console.error('Error creating user:', error);
-      return { success: false, message: 'Error creating user', error: error };
+      console.error("Error creating user:", error);
+      return { success: false, message: "Error creating user", error: error };
     }
   }
 
@@ -95,10 +93,10 @@ class userManagmentRepo {
       TableName: config.dynamoDbTable,
       Key: {
         pk: config.PK,
-        sk: `${config.SK}`+"#"+`${email}`,
+        sk: `${config.SK}` + "#" + `${email}`,
       },
     };
-  
+
     try {
       const result = await dynamoDbClient.delete(params).promise();
       if (!result.Attributes) {
@@ -107,7 +105,7 @@ class userManagmentRepo {
         return false; // No item found to delete
       }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
       throw error; // Throw the error to handle it in the caller function
     }
   }
@@ -151,10 +149,10 @@ class userManagmentRepo {
 
     try {
       const result = await dynamoDbClient.update(params).promise();
-      return { success: true, message: 'User updated successfully', data: result.Attributes };
+      return { success: true, message: "User updated successfully", data: result.Attributes };
     } catch (error) {
-      console.error('Error updating user:', error);
-      return { success: false, message: 'Error updating user', error: error };
+      console.error("Error updating user:", error);
+      return { success: false, message: "Error updating user", error: error };
     }
   }
 
@@ -167,26 +165,24 @@ class userManagmentRepo {
         sk: `${config.SK}#${email}`,
       },
 
-      UpdateExpression: 'SET #password = :newPassword',
+      UpdateExpression: "SET #password = :newPassword",
       ExpressionAttributeNames: {
-        '#password': 'password',
+        "#password": "password",
       },
       ExpressionAttributeValues: {
-        ':newPassword': hashedPassword,
+        ":newPassword": hashedPassword,
       },
-      ReturnValues: 'ALL_NEW', // Optional, returns the updated item
+      ReturnValues: "ALL_NEW", // Optional, returns the updated item
     };
 
     try {
       const result = await dynamoDbClient.update(params).promise();
       return { success: true, updatedUser: result.Attributes };
     } catch (error) {
-      console.error('Error updating password:', error);
+      console.error("Error updating password:", error);
       return { success: false, error: error };
     }
-  
-}
-
+  }
 }
 
 module.exports = new userManagmentRepo();

@@ -168,12 +168,7 @@ class ProfileRepository {
     }
   }
 
-  static async updatedProfile(
-    oldSlug,
-    updateExpression,
-    expressionAttributeNames,
-    expressionAttributeValues
-  ) {
+  static async updatedProfile(oldSlug, updateExpression, expressionAttributeNames, expressionAttributeValues) {
     try {
       let expression = updateExpression;
       if (expression.endsWith(",")) {
@@ -209,32 +204,21 @@ class ProfileRepository {
     }
 
     if (generateType === "profileSummary") {
-      if (
-        data.level == "Software engineer entry level" ||
-        data.level == "Software engineer level 1"
-      ) {
+      if (data.level == "Software engineer entry level" || data.level == "Software engineer level 1") {
         prompt = await PromptService.profileSummaryPromptForJunior(data);
       } else {
         prompt = await PromptService.profileSummaryPrompt(data);
       }
 
       const summary = await OpenAIService.generate(prompt);
-      const result = await ProfileRepository.updateProfileData(
-        slug,
-        property,
-        summary
-      );
+      const result = await ProfileRepository.updateProfileData(slug, property, summary);
 
       return result;
     }
     if (generateType === "experienceSummary") {
       const prompt = await PromptService.experienceSummaryPrompt(data);
       const summary = await OpenAIService.generate(prompt);
-      const result = await ProfileRepository.updateProfileData(
-        slug,
-        property,
-        summary
-      );
+      const result = await ProfileRepository.updateProfileData(slug, property, summary);
 
       return result;
     }
@@ -254,33 +238,21 @@ class ProfileRepository {
       const prompt = await PromptService.candidateTechnicalSkillsPrompt(data);
       const skills = await OpenAIService.generate(prompt);
       const dataToUpdate = JSON.parse(cleanJsonString(skills));
-      const result = await ProfileRepository.updateProfileData(
-        slug,
-        property,
-        dataToUpdate.technicalSkills
-      );
+      const result = await ProfileRepository.updateProfileData(slug, property, dataToUpdate.technicalSkills);
 
       return result;
     }
     if (generateType === "projectSummary") {
       const prompt = await PromptService.projectSummaryPrompt(data);
       const summary = await OpenAIService.generate(prompt);
-      const result = await ProfileRepository.updateProfileData(
-        slug,
-        property,
-        summary
-      );
+      const result = await ProfileRepository.updateProfileData(slug, property, summary);
 
       return result;
     }
     if (generateType === "recommendationRefinement") {
       const prompt = await PromptService.recommendationPrompt(data);
       const recommendation = await OpenAIService.generate(prompt);
-      const result = await ProfileRepository.updateProfileData(
-        slug,
-        property,
-        recommendation
-      );
+      const result = await ProfileRepository.updateProfileData(slug, property, recommendation);
 
       return result;
     } else {

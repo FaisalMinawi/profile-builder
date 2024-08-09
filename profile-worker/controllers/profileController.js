@@ -8,9 +8,7 @@ exports.updateProfile = async (req, res) => {
     res.json(updatedProfile);
   } catch (error) {
     console.error("Error in updateProfile:", error);
-    res
-      .status(error.message.includes("not found") ? 404 : 500)
-      .json({ error: error.message });
+    res.status(error.message.includes("not found") ? 404 : 500).json({ error: error.message });
   }
 };
 exports.getProfile = async (req, res) => {
@@ -21,8 +19,6 @@ exports.getProfile = async (req, res) => {
     res.json(profile);
   } catch (error) {
     console.error("Error in getProfile:", error);
-    res
-      .status(error.message.includes("not found") ? 404 : 500)
-      .json({ error: error.message });
+    res.status(error.message.includes("not found") ? 404 : 500).json({ error: error.message });
   }
 };

@@ -37,9 +37,7 @@ class ProfileRepository {
       const attributeName = `#attr${index}`;
       const attributeValue = `:val${index}`;
 
-      params.UpdateExpression += `${
-        index === 0 ? "" : ","
-      } ${attributeName} = ${attributeValue}`;
+      params.UpdateExpression += `${index === 0 ? "" : ","} ${attributeName} = ${attributeValue}`;
       params.ExpressionAttributeNames[attributeName] = key;
       params.ExpressionAttributeValues[attributeValue] = updateData[key];
     });

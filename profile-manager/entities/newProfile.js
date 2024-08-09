@@ -9,9 +9,7 @@ class NewProfile {
     this.secondNameInitials = data.lastName[0];
     this.level = data.levelOfExperience;
     this.seniority = data.targetRole;
-    this.linkedInProfile = files.linkedInPage
-      ? files.linkedInPage.Key
-      : "";
+    this.linkedInProfile = files.linkedInPage ? files.linkedInPage.Key : "";
     this.githubLink = data.githubLink !== "null" ? data.githubLink : "";
     this.profileNumber = data.profileNumber;
     this.slug = data.slug;
@@ -23,8 +21,7 @@ class NewProfile {
     this.photo = files.photo ? files.photo.Key : "";
     this.cvUrl = files.cv ? files.cv.Key : "";
     this.coverLetterUrl = files.coverLetter ? files.coverLetter.Key : "";
-    this.linkedInPageUrl =
-      data.linkedInLink !== "null" ? data.linkedInLink : "";
+    this.linkedInPageUrl = data.linkedInLink !== "null" ? data.linkedInLink : "";
   }
 
   getCurrentDate() {

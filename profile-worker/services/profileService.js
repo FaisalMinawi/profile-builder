@@ -17,10 +17,7 @@ class ProfileService {
   //Update the profile after getting all the data from teh open ai serivce
   static async updateProfile(slug, updateData) {
     try {
-      const updatedProfile = await ProfileRepository.updateProfile(
-        slug,
-        updateData
-      );
+      const updatedProfile = await ProfileRepository.updateProfile(slug, updateData);
       return updatedProfile;
     } catch (error) {
       console.error("Error updating profile:", error.message);
@@ -31,11 +28,7 @@ class ProfileService {
   //this method to update profile property mainly will be used to update the status of the profile while generating.
   static async updateProfileProperty(slug, propertyName, propertyValue) {
     try {
-      const result = await ProfileRepository.updateProfileProperty(
-        slug,
-        propertyName,
-        propertyValue
-      );
+      const result = await ProfileRepository.updateProfileProperty(slug, propertyName, propertyValue);
       return result;
     } catch (error) {
       console.error("Error updating profile property:", error.message);

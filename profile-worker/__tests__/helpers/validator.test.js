@@ -1,8 +1,8 @@
-const { validateResponse } = require('../../helpers/validator');
+const { validateResponse } = require("../../helpers/validator");
 
-describe('validateResponse', () => {
-    it('should return true for valid input with all required properties', () => {
-        const inputString = `
+describe("validateResponse", () => {
+  it("should return true for valid input with all required properties", () => {
+    const inputString = `
             specialization
             yearsExperience
             domainExperience
@@ -21,13 +21,13 @@ describe('validateResponse', () => {
             courses
         `;
 
-        const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
+    const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
 
-        expect(isValid).toBe(true);
-    });
+    expect(isValid).toBe(true);
+  });
 
-    it('should return false for input missing some required properties', () => {
-        const inputString = `
+  it("should return false for input missing some required properties", () => {
+    const inputString = `
             specialization
             yearsExperience
             domainExperience
@@ -45,21 +45,21 @@ describe('validateResponse', () => {
             recommendations
         `;
 
-        const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
+    const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
 
-        expect(isValid).toBe(false);
-    });
+    expect(isValid).toBe(false);
+  });
 
-    it('should return false for empty input', () => {
-        const inputString = '';
+  it("should return false for empty input", () => {
+    const inputString = "";
 
-        const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
+    const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
 
-        expect(isValid).toBe(false);
-    });
+    expect(isValid).toBe(false);
+  });
 
-    it('should return true for input with all required properties plus extra content', () => {
-        const inputString = `
+  it("should return true for input with all required properties plus extra content", () => {
+    const inputString = `
             specialization
             yearsExperience
             domainExperience
@@ -79,14 +79,13 @@ describe('validateResponse', () => {
             additionalContent
         `;
 
-        const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
+    const isValid = validateResponse(inputString.trim()); // trim to remove leading/trailing whitespace
 
-        expect(isValid).toBe(true);
-    });
+    expect(isValid).toBe(true);
+  });
 
-    it('should return true for comma-separated input with all required properties', () => {
-        const inputString =
-        `specialization,
+  it("should return true for comma-separated input with all required properties", () => {
+    const inputString = `specialization,
         yearsExperience,
         domainExperience,
         keyStrengths,
@@ -103,8 +102,8 @@ describe('validateResponse', () => {
         recommendations,
         courses,`;
 
-        const isValid = validateResponse(inputString);
+    const isValid = validateResponse(inputString);
 
-        expect(isValid).toBe(true);
-    });
+    expect(isValid).toBe(true);
+  });
 });

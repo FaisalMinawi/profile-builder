@@ -1,12 +1,9 @@
-const {
-  fetchAndParseFileFromS3,
-} = require("../infrastructure/profileRepository");
+const { fetchAndParseFileFromS3 } = require("../infrastructure/profileRepository");
 
 class PromptService {
   static async createProfileGenerationPrompt(profileInformation) {
     //Get content from the s3 bucket
-    const { coverLetterUrl, cvUrl, linkedInProfile, level } =
-      profileInformation;
+    const { coverLetterUrl, cvUrl, linkedInProfile, level } = profileInformation;
     let coverLetterContent = null;
     let cvContent = null;
     let linkedInProfileContent = null;
@@ -262,8 +259,7 @@ Instructions:
 6. Summary Section:
    - Incorporate relevant information from the cover letter, if available.
    - ${
-     level == "Software engineer level 1" ||
-     level == "Software engineer entry level"
+     level == "Software engineer level 1" || level == "Software engineer entry level"
        ? juniorSummaryPrompt
        : summaryPrompt
    }

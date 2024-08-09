@@ -1,24 +1,24 @@
-const jwt = require('jsonwebtoken');
-const userService = require('../services/userService');
-const tokenService = require('../services/tokenService');
-const authenticateUser = require('../usecases/authenticateUser');
-const User = require('../entities/user');
+const jwt = require("jsonwebtoken");
+const userService = require("../services/userService");
+const tokenService = require("../services/tokenService");
+const authenticateUser = require("../usecases/authenticateUser");
+const User = require("../entities/user");
 
-jest.mock('../services/userService');
-jest.mock('../services/tokenService');
-jest.mock('jsonwebtoken');
+jest.mock("../services/userService");
+jest.mock("../services/tokenService");
+jest.mock("jsonwebtoken");
 
-describe('authenticateUser', () => {
-  const mockEmail = 'test@example.com';
-  const mockPassword = 'password123';
+describe("authenticateUser", () => {
+  const mockEmail = "test@example.com";
+  const mockPassword = "password123";
   const mockUser = {
     email: mockEmail,
     password: mockPassword,
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
     acl: {
-      roles: ['user'],
-      resources: ['read'],
+      roles: ["user"],
+      resources: ["read"],
     },
   };
 
@@ -28,21 +28,21 @@ describe('authenticateUser', () => {
     jwt.sign.mockReset();
   });
 
-  it('should throw an error if user does not exist', async () => {
+  it("should throw an error if user does not exist", async () => {
     userService.getUserByEmail.mockResolvedValue(null);
 
-    await expect(authenticateUser(mockEmail, mockPassword)).rejects.toThrow('Invalid email or password');
+    await expect(authenticateUser(mockEmail, mockPassword)).rejects.toThrow("Invalid email or password");
   });
 
-  it('should throw an error if password does not match', async () => {
+  it("should throw an error if password does not match", async () => {
     userService.getUserByEmail.mockResolvedValue(mockUser);
 
-    await expect(authenticateUser(mockEmail, 'wrongPassword')).rejects.toThrow('Invalid email or password');
+    await expect(authenticateUser(mockEmail, "wrongPassword")).rejects.toThrow("Invalid email or password");
   });
 
-  it('should return access and refresh tokens for valid credentials', async () => {
+  it("should return access and refresh tokens for valid credentials", async () => {
     userService.getUserByEmail.mockResolvedValue(mockUser);
-    jwt.sign.mockReturnValueOnce('accessToken').mockReturnValueOnce('refreshToken');
+    jwt.sign.mockReturnValueOnce("accessToken").mockReturnValueOnce("refreshToken");
 
     const result = await authenticateUser(mockEmail, mockPassword);
 
@@ -57,10 +57,10 @@ describe('authenticateUser', () => {
         permissions: mockUser.acl.resources,
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: "1d" }
     );
-    expect(jwt.sign).toHaveBeenCalledWith({ email: mockUser.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    expect(tokenService.storeTokens).toHaveBeenCalledWith('accessToken', 'refreshToken');
-    expect(result).toEqual({ accessToken: 'accessToken', refreshToken: 'refreshToken' });
+    expect(jwt.sign).toHaveBeenCalledWith({ email: mockUser.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    expect(tokenService.storeTokens).toHaveBeenCalledWith("accessToken", "refreshToken");
+    expect(result).toEqual({ accessToken: "accessToken", refreshToken: "refreshToken" });
   });
 });

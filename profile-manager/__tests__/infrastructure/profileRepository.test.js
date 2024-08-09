@@ -1,14 +1,13 @@
 import ProfileRepository from "../../infrastructure/profileRepository";
 import dynamoDbClient from "../../infrastructure/dynamoDbClient";
-import PromptService from '../../services/promptService.js';
-import OpenAIService from '../../infrastructure/openAIService.js';
+import PromptService from "../../services/promptService.js";
+import OpenAIService from "../../infrastructure/openAIService.js";
 import { config } from "../../config/config";
 
 jest.mock("../../services/promptService");
 jest.mock("../../infrastructure/openAIService");
-jest.mock('../../config/config');
-jest.mock('../../infrastructure/dynamoDbClient');
-
+jest.mock("../../config/config");
+jest.mock("../../infrastructure/dynamoDbClient");
 
 describe("ProfileRepository", () => {
   beforeEach(() => {
@@ -96,9 +95,7 @@ describe("ProfileRepository", () => {
         promise: jest.fn().mockRejectedValue(new Error("DynamoDB error")),
       });
 
-      await expect(
-        ProfileRepository.getAllProfiles("draft", 10, null)
-      ).rejects.toThrow("Error fetching profiles");
+      await expect(ProfileRepository.getAllProfiles("draft", 10, null)).rejects.toThrow("Error fetching profiles");
     });
   });
 
@@ -146,9 +143,7 @@ describe("ProfileRepository", () => {
         promise: jest.fn().mockRejectedValue(new Error("DynamoDB error")),
       });
 
-      await expect(
-        ProfileRepository.deleteProfile("error-slug")
-      ).rejects.toThrow("DynamoDB error");
+      await expect(ProfileRepository.deleteProfile("error-slug")).rejects.toThrow("DynamoDB error");
     });
   });
 
@@ -186,9 +181,7 @@ describe("ProfileRepository", () => {
         promise: jest.fn().mockRejectedValue(new Error("DynamoDB error")),
       });
 
-      await expect(
-        ProfileRepository.getProfile("error-slug")
-      ).rejects.toThrow("Failed to get data from DynamoDB.");
+      await expect(ProfileRepository.getProfile("error-slug")).rejects.toThrow("Failed to get data from DynamoDB.");
     });
   });
 
@@ -244,9 +237,7 @@ describe("ProfileRepository", () => {
         lastName: "Doe",
       };
 
-      await expect(
-        ProfileRepository.createProfile(profile)
-      ).resolves.not.toThrow();
+      await expect(ProfileRepository.createProfile(profile)).resolves.not.toThrow();
 
       expect(dynamoDbClient.put).toHaveBeenCalledWith({
         TableName: "test-table",
@@ -266,97 +257,106 @@ describe("ProfileRepository", () => {
         lastName: "Doe",
       };
 
-      await expect(ProfileRepository.createProfile(profile)).rejects.toThrow(
-        "Failed to store data in DynamoDB."
-      );
+      await expect(ProfileRepository.createProfile(profile)).rejects.toThrow("Failed to store data in DynamoDB.");
     });
   });
 
-  describe('devCrew-regenerateAndUpdateProfile', () => {
-    const slug = 'test-slug';
-    const property = 'test.property.path';
-    const data = { some: 'data' };
+  describe("devCrew-regenerateAndUpdateProfile", () => {
+    const slug = "test-slug";
+    const property = "test.property.path";
+    const data = { some: "data" };
     const profile = { slug: slug };
-    const summaryValue = 'generated summary';
-    const responsibilitiesValue = { responsibilitiesAndAccomplishments: 'generated responsibilities' };
-    const skillsValue = { technicalSkills: 'generated skills' };
+    const summaryValue = "generated summary";
+    const responsibilitiesValue = { responsibilitiesAndAccomplishments: "generated responsibilities" };
+    const skillsValue = { technicalSkills: "generated skills" };
 
     beforeEach(() => {
       jest.clearAllMocks();
     });
 
-    it('should throw an error if profile is not found', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(null);
+    it("should throw an error if profile is not found", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(null);
 
-      await expect(ProfileRepository.regenerateAndUpdateProfile(slug, 'profileSummary', property, data)).rejects.toThrow('Profile not found');
+      await expect(
+        ProfileRepository.regenerateAndUpdateProfile(slug, "profileSummary", property, data)
+      ).rejects.toThrow("Profile not found");
     });
 
-    it('should regenerate and update profile summary', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(profile);
-      PromptService.profileSummaryPrompt.mockResolvedValue('profile-summary-prompt');
+    it("should regenerate and update profile summary", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(profile);
+      PromptService.profileSummaryPrompt.mockResolvedValue("profile-summary-prompt");
       OpenAIService.generate.mockResolvedValue(summaryValue);
-      jest.spyOn(ProfileRepository, 'updateProfileData').mockResolvedValue({ success: true });
+      jest.spyOn(ProfileRepository, "updateProfileData").mockResolvedValue({ success: true });
 
-      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, 'profileSummary', property, data);
+      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, "profileSummary", property, data);
 
       expect(PromptService.profileSummaryPrompt).toHaveBeenCalledWith(data);
-      expect(OpenAIService.generate).toHaveBeenCalledWith('profile-summary-prompt');
+      expect(OpenAIService.generate).toHaveBeenCalledWith("profile-summary-prompt");
       expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(slug, property, summaryValue);
       expect(result).toEqual({ success: true });
     });
 
-    it('should regenerate and update experience summary', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(profile);
-      PromptService.experienceSummaryPrompt.mockResolvedValue('experience-summary-prompt');
+    it("should regenerate and update experience summary", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(profile);
+      PromptService.experienceSummaryPrompt.mockResolvedValue("experience-summary-prompt");
       OpenAIService.generate.mockResolvedValue(summaryValue);
-      jest.spyOn(ProfileRepository, 'updateProfileData').mockResolvedValue({ success: true });
+      jest.spyOn(ProfileRepository, "updateProfileData").mockResolvedValue({ success: true });
 
-      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, 'experienceSummary', property, data);
+      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, "experienceSummary", property, data);
 
       expect(PromptService.experienceSummaryPrompt).toHaveBeenCalledWith(data);
-      expect(OpenAIService.generate).toHaveBeenCalledWith('experience-summary-prompt');
+      expect(OpenAIService.generate).toHaveBeenCalledWith("experience-summary-prompt");
       expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(slug, property, summaryValue);
       expect(result).toEqual({ success: true });
     });
 
-    it('should regenerate and update experience responsibilities', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(profile);
-      PromptService.experienceresponsibilitiesPrompt.mockResolvedValue('experience-responsibilities-prompt');
+    it("should regenerate and update experience responsibilities", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(profile);
+      PromptService.experienceresponsibilitiesPrompt.mockResolvedValue("experience-responsibilities-prompt");
       OpenAIService.generate.mockResolvedValue(JSON.stringify(responsibilitiesValue));
-      jest.spyOn(ProfileRepository, 'updateProfileData').mockResolvedValue({ success: true });
+      jest.spyOn(ProfileRepository, "updateProfileData").mockResolvedValue({ success: true });
 
-      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, 'experienceResponsibilities', property, data);
+      const result = await ProfileRepository.regenerateAndUpdateProfile(
+        slug,
+        "experienceResponsibilities",
+        property,
+        data
+      );
 
       expect(PromptService.experienceresponsibilitiesPrompt).toHaveBeenCalledWith(data);
-      expect(OpenAIService.generate).toHaveBeenCalledWith('experience-responsibilities-prompt');
-      expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(slug, property, responsibilitiesValue.responsibilitiesAndAccomplishments);
+      expect(OpenAIService.generate).toHaveBeenCalledWith("experience-responsibilities-prompt");
+      expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(
+        slug,
+        property,
+        responsibilitiesValue.responsibilitiesAndAccomplishments
+      );
       expect(result).toEqual({ success: true });
     });
 
-    it('should regenerate and update technical skills', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(profile);
-      PromptService.candidateTechnicalSkillsPrompt.mockResolvedValue('technical-skills-prompt');
+    it("should regenerate and update technical skills", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(profile);
+      PromptService.candidateTechnicalSkillsPrompt.mockResolvedValue("technical-skills-prompt");
       OpenAIService.generate.mockResolvedValue(JSON.stringify(skillsValue));
-      jest.spyOn(ProfileRepository, 'updateProfileData').mockResolvedValue({ success: true });
+      jest.spyOn(ProfileRepository, "updateProfileData").mockResolvedValue({ success: true });
 
-      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, 'technicalSkills', property, data);
+      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, "technicalSkills", property, data);
 
       expect(PromptService.candidateTechnicalSkillsPrompt).toHaveBeenCalledWith(data);
-      expect(OpenAIService.generate).toHaveBeenCalledWith('technical-skills-prompt');
+      expect(OpenAIService.generate).toHaveBeenCalledWith("technical-skills-prompt");
       expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(slug, property, skillsValue.technicalSkills);
       expect(result).toEqual({ success: true });
     });
 
-    it('should regenerate and update project summary', async () => {
-      jest.spyOn(ProfileRepository, 'getProfileBySlug').mockResolvedValue(profile);
-      PromptService.projectSummaryPrompt.mockResolvedValue('project-summary-prompt');
+    it("should regenerate and update project summary", async () => {
+      jest.spyOn(ProfileRepository, "getProfileBySlug").mockResolvedValue(profile);
+      PromptService.projectSummaryPrompt.mockResolvedValue("project-summary-prompt");
       OpenAIService.generate.mockResolvedValue(summaryValue);
-      jest.spyOn(ProfileRepository, 'updateProfileData').mockResolvedValue({ success: true });
+      jest.spyOn(ProfileRepository, "updateProfileData").mockResolvedValue({ success: true });
 
-      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, 'projectSummary', property, data);
+      const result = await ProfileRepository.regenerateAndUpdateProfile(slug, "projectSummary", property, data);
 
       expect(PromptService.projectSummaryPrompt).toHaveBeenCalledWith(data);
-      expect(OpenAIService.generate).toHaveBeenCalledWith('project-summary-prompt');
+      expect(OpenAIService.generate).toHaveBeenCalledWith("project-summary-prompt");
       expect(ProfileRepository.updateProfileData).toHaveBeenCalledWith(slug, property, summaryValue);
       expect(result).toEqual({ success: true });
     });
@@ -389,9 +389,9 @@ describe("ProfileRepository", () => {
         promise: jest.fn().mockRejectedValue(new Error("DynamoDB error")),
       });
 
-      await expect(
-        ProfileRepository.updateProfileAttribute("test-slug", "firstName", "UpdatedName")
-      ).rejects.toThrow("Failed to update data in DynamoDB.");
+      await expect(ProfileRepository.updateProfileAttribute("test-slug", "firstName", "UpdatedName")).rejects.toThrow(
+        "Failed to update data in DynamoDB."
+      );
     });
   });
 

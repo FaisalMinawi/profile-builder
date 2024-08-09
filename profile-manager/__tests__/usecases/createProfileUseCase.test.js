@@ -26,12 +26,8 @@ describe("CreateProfileUseCase", () => {
       files: {
         photo: [{ buffer: Buffer.from("photo"), mimetype: "image/jpeg" }],
         cv: [{ buffer: Buffer.from("cv"), mimetype: "application/pdf" }],
-        coverLetter: [
-          { buffer: Buffer.from("coverLetter"), mimetype: "application/pdf" },
-        ],
-        linkedInPage: [
-          { buffer: Buffer.from("linkedInPage"), mimetype: "application/pdf" },
-        ],
+        coverLetter: [{ buffer: Buffer.from("coverLetter"), mimetype: "application/pdf" }],
+        linkedInPage: [{ buffer: Buffer.from("linkedInPage"), mimetype: "application/pdf" }],
       },
     };
   });
@@ -70,60 +66,39 @@ describe("CreateProfileUseCase", () => {
       mockReq.files.linkedInPage[0],
       mockReq.body.profileNumber
     );
-    expect(ProfileService.createProfile).toHaveBeenCalledWith(
-      mockReq.body,
-      mockUploadedFiles
-    );
-    expect(
-      NotificationService.sendProfileCreatedNotification
-    ).toHaveBeenCalledWith(mockCreatedProfile);
+    expect(ProfileService.createProfile).toHaveBeenCalledWith(mockReq.body, mockUploadedFiles);
+    expect(NotificationService.sendProfileCreatedNotification).toHaveBeenCalledWith(mockCreatedProfile);
     expect(result).toEqual(mockCreatedProfile);
   });
 
   it("should throw error if input validation fails", async () => {
-    profileValidator.validateInputs.mockRejectedValue(
-      new Error("Input validation failed")
-    );
+    profileValidator.validateInputs.mockRejectedValue(new Error("Input validation failed"));
 
-    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow(
-      "Input validation failed"
-    );
+    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow("Input validation failed");
   });
 
   it("should throw error if file validation fails", async () => {
     profileValidator.validateInputs.mockResolvedValue();
-    profileValidator.validateFiles.mockRejectedValue(
-      new Error("File validation failed")
-    );
+    profileValidator.validateFiles.mockRejectedValue(new Error("File validation failed"));
 
-    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow(
-      "File validation failed"
-    );
+    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow("File validation failed");
   });
 
   it("should handle file upload failure", async () => {
     profileValidator.validateInputs.mockResolvedValue();
     profileValidator.validateFiles.mockResolvedValue();
-    FileUploadHelper.handleFileUpload.mockRejectedValue(
-      new Error("File upload failed")
-    );
+    FileUploadHelper.handleFileUpload.mockRejectedValue(new Error("File upload failed"));
 
-    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow(
-      "File upload failed"
-    );
+    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow("File upload failed");
   });
 
   it("should handle profile creation failure", async () => {
     profileValidator.validateInputs.mockResolvedValue();
     profileValidator.validateFiles.mockResolvedValue();
     FileUploadHelper.handleFileUpload.mockResolvedValue({});
-    ProfileService.createProfile.mockRejectedValue(
-      new Error("Profile creation failed")
-    );
+    ProfileService.createProfile.mockRejectedValue(new Error("Profile creation failed"));
 
-    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow(
-      "Profile creation failed"
-    );
+    await expect(CreateProfileUseCase.createProfile(mockReq)).rejects.toThrow("Profile creation failed");
   });
 
   it("should handle notification failure but still create profile", async () => {
@@ -132,21 +107,15 @@ describe("CreateProfileUseCase", () => {
     FileUploadHelper.handleFileUpload.mockResolvedValue({});
     const mockCreatedProfile = { slug: "test-slug" };
     ProfileService.createProfile.mockResolvedValue(mockCreatedProfile);
-    NotificationService.sendProfileCreatedNotification.mockRejectedValue(
-      new Error("Notification failed")
-    );
+    NotificationService.sendProfileCreatedNotification.mockRejectedValue(new Error("Notification failed"));
 
     const consoleSpy = jest.spyOn(console, "error").mockImplementation();
 
     const result = await CreateProfileUseCase.createProfile(mockReq);
 
     expect(result).toEqual(mockCreatedProfile);
-    expect(
-      NotificationService.sendProfileCreatedNotification
-    ).toHaveBeenCalledWith(mockCreatedProfile);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      "Failed to send notification: Notification failed"
-    );
+    expect(NotificationService.sendProfileCreatedNotification).toHaveBeenCalledWith(mockCreatedProfile);
+    expect(consoleSpy).toHaveBeenCalledWith("Failed to send notification: Notification failed");
 
     consoleSpy.mockRestore();
   });

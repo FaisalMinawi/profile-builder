@@ -22,12 +22,10 @@ describe("ProfileValidator", () => {
         scoreSheetLink: "https://example.com/scoresheet",
         linkedInLink: "https://linkedin.com/in/johndoe",
         githubLink: "https://github.com/johndoe",
-        email: "john.doe@example.com"
+        email: "john.doe@example.com",
       };
 
-      await expect(
-        ProfileValidator.validateInputs(validData)
-      ).resolves.not.toThrow();
+      await expect(ProfileValidator.validateInputs(validData)).resolves.not.toThrow();
     });
 
     it("should throw error for missing required fields", async () => {
@@ -35,9 +33,7 @@ describe("ProfileValidator", () => {
         firstName: "John",
       };
 
-      await expect(
-        ProfileValidator.validateInputs(invalidData)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateInputs(invalidData)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for invalid URL fields", async () => {
@@ -51,12 +47,10 @@ describe("ProfileValidator", () => {
         scoreSheetLink: "invalid-url",
         linkedInLink: "invalid-url",
         githubLink: "invalid-url",
-        email: "john.doe@example.com"
+        email: "john.doe@example.com",
       };
 
-      await expect(
-        ProfileValidator.validateInputs(invalidData)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateInputs(invalidData)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for invalid slug format", async () => {
@@ -68,12 +62,10 @@ describe("ProfileValidator", () => {
         profileNumber: "12345",
         slug: "invalid_slug",
         scoreSheetLink: "https://example.com/scoresheet",
-        email: "john.doe@example.com"
+        email: "john.doe@example.com",
       };
 
-      await expect(
-        ProfileValidator.validateInputs(invalidData)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateInputs(invalidData)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for invalid email format", async () => {
@@ -85,12 +77,10 @@ describe("ProfileValidator", () => {
         profileNumber: "12345",
         slug: "john-doe",
         scoreSheetLink: "https://example.com/scoresheet",
-        email: "invalid-email"
+        email: "invalid-email",
       };
 
-      await expect(
-        ProfileValidator.validateInputs(invalidData)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateInputs(invalidData)).rejects.toThrow("Validation failed.");
     });
   });
 
@@ -115,9 +105,7 @@ describe("ProfileValidator", () => {
         ],
       };
 
-      await expect(
-        ProfileValidator.validateFiles(validFiles)
-      ).resolves.not.toThrow();
+      await expect(ProfileValidator.validateFiles(validFiles)).resolves.not.toThrow();
     });
 
     it("should throw error for missing required files", async () => {
@@ -125,9 +113,7 @@ describe("ProfileValidator", () => {
         cv: [{ mimetype: "application/pdf", size: 2000000, fieldname: "cv" }],
       };
 
-      await expect(
-        ProfileValidator.validateFiles(invalidFiles)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateFiles(invalidFiles)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for invalid file types", async () => {
@@ -150,9 +136,7 @@ describe("ProfileValidator", () => {
         ],
       };
 
-      await expect(
-        ProfileValidator.validateFiles(invalidFiles)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateFiles(invalidFiles)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for files exceeding size limit", async () => {
@@ -175,9 +159,7 @@ describe("ProfileValidator", () => {
         ],
       };
 
-      await expect(
-        ProfileValidator.validateFiles(invalidFiles)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateFiles(invalidFiles)).rejects.toThrow("Validation failed.");
     });
   });
 
@@ -202,17 +184,13 @@ describe("ProfileValidator", () => {
         ],
       };
 
-      await expect(
-        ProfileValidator.validateUpdatedFiles(validFiles)
-      ).resolves.not.toThrow();
+      await expect(ProfileValidator.validateUpdatedFiles(validFiles)).resolves.not.toThrow();
     });
 
     it("should pass if no files are provided", async () => {
       const noFiles = {};
 
-      await expect(
-        ProfileValidator.validateUpdatedFiles(noFiles)
-      ).resolves.not.toThrow();
+      await expect(ProfileValidator.validateUpdatedFiles(noFiles)).resolves.not.toThrow();
     });
 
     it("should throw error for invalid file types", async () => {
@@ -220,9 +198,7 @@ describe("ProfileValidator", () => {
         photo: [{ mimetype: "image/gif", size: 1000000, fieldname: "photo" }],
       };
 
-      await expect(
-        ProfileValidator.validateUpdatedFiles(invalidFiles)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateUpdatedFiles(invalidFiles)).rejects.toThrow("Validation failed.");
     });
 
     it("should throw error for files exceeding size limit", async () => {
@@ -230,9 +206,7 @@ describe("ProfileValidator", () => {
         photo: [{ mimetype: "image/jpeg", size: 10000000, fieldname: "photo" }],
       };
 
-      await expect(
-        ProfileValidator.validateUpdatedFiles(invalidFiles)
-      ).rejects.toThrow("Validation failed.");
+      await expect(ProfileValidator.validateUpdatedFiles(invalidFiles)).rejects.toThrow("Validation failed.");
     });
   });
 });

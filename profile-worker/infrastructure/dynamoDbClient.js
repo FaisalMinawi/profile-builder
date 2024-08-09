@@ -12,7 +12,6 @@
 
 // module.exports = dynamoDbClient;
 
-
 const AWS = require("aws-sdk");
 require("dotenv").config();
 

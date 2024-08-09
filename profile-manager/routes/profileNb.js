@@ -3,6 +3,6 @@ import profileNbController from "../controllers/profileNbController.js";
 
 const profileNbRouter = Router();
 
-profileNbRouter.get('/', profileNbController.getProfileNumber);
+profileNbRouter.get("/", profileNbController.getProfileNumber);
 
 export default profileNbRouter;

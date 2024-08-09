@@ -17,10 +17,7 @@ jest.mock("../../controllers/workerController", () => ({
 describe("Worker Router", () => {
   it("should set up POST route for /generateProfile", () => {
     // Check if the router.post method was called with the correct arguments
-    expect(router.post).toHaveBeenCalledWith(
-      "/",
-      workerController.generateProfile
-    );
+    expect(router.post).toHaveBeenCalledWith("/", workerController.generateProfile);
   });
 
   it("should export the router", () => {
